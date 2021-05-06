@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Post extends Model
 {
@@ -11,12 +12,13 @@ class Post extends Model
 
     protected $fillable = ['status', 'image', 'images'];
 
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function images(){
+    public function images()
+    {
         return $this->hasMany(PostImage::class);
     }
 
@@ -29,4 +31,5 @@ class Post extends Model
     {
         return $this->hasMany(React::class);
     }
+
 }

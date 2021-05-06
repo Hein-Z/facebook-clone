@@ -15,8 +15,8 @@ class NewsFeedController extends Controller
         if ($friends->isEmpty()) {
             return response()->json(auth()->user()->posts);
         }
-
-        $posts = Post::with('images')->whereIn('user_id', $friends->pluck('user_id')->merge($friends->pluck('friend_id'))->unique())
+//
+        $posts = Post::with('user')->with('images')->whereIn('user_id', $friends->pluck('user_id')->merge($friends->pluck('friend_id'))->unique())
             ->withCount([
                 'reacts as like_count' => function ($query) {
                     $query->where('type', 'like');
@@ -36,8 +36,8 @@ class NewsFeedController extends Controller
                 'reacts as angry_count' => function ($query) {
                     $query->where('type', 'angry');
                 }
-            ])
-            ->latest()->paginate(10);
+            ])->withCount('comments')
+            ->latest()->paginate(5);
 
 
         return response()->json($posts);

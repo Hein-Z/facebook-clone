@@ -1,5 +1,4 @@
 import AppStorage from "../../helper/AppStorage";
-import Token from "../../helper/Token";
 
 export default {
     namespaced: true,
@@ -64,12 +63,27 @@ export default {
     actions: {
         login({commit, state}, user) {
             return axios.post('auth/login', {email: user.email, password: user.password}).then(response => {
-                commit('SET_USER', user);
+                commit('SET_USER', response.data.user);
+                commit('SET_TOKEN', response.data.access_token);
+                commit('SET_EXPIRES_IN', response.data.expires_in);
+
+                const token = 'Bearer ' + response.data.access_token;
+                window.axios.defaults.headers.common['Authorization'] = token;
                 return response
-            }, error => {
+            }).catch(error => {
                 commit('SET_USER', {})
                 throw error.response
             })
+        },
+        logout({commit}) {
+            return axios.post('auth/logout').then(response => {
+                commit('CLEAR_USER');
+                commit('CLEAR_TOKEN');
+                commit('CLEAR_EXPIRES_IN');
+                return response
+            }).catch(error => {
+                throw error.response
+            });
         },
         register({commit, state}, user) {
             return axios.post('auth/register', {
@@ -80,7 +94,7 @@ export default {
             }).then(response => {
                 commit('SET_USER', user);
                 return response
-            }, error => {
+            }).catch(error => {
                 commit('SET_USER', {})
                 throw error.response
             })
@@ -91,16 +105,14 @@ export default {
                 verification_code
             }).then(response => {
                 return response
-            }, error => {
+            }).catch(error => {
                 throw error.response
             })
         },
         resendCode({commit, state}) {
             return axios.post('auth/sendVerificationCode', {email: AppStorage.getUser().email}).then(response => {
-
                 return response
-            }, error => {
-
+            }).catch(error => {
                 throw error.response
             })
         },

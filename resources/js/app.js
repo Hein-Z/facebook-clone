@@ -31,7 +31,10 @@ import App from './App';
 //support vuex
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
+
+
 import storeData from "./store/index"
 
 const store = new Vuex.Store(
@@ -44,3 +47,4 @@ const app = new Vue({
     store,
     components: {App},
 });
+

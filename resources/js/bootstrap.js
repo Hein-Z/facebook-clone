@@ -1,3 +1,5 @@
+import AppStorage from "./helper/AppStorage";
+
 window._ = require('lodash');
 
 /**
@@ -11,7 +13,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -24,8 +27,8 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-// const token = 'Bearer ' + AppStorage.getToken();
-// window.axios.defaults.headers.common['Authorization'] = token;
+const token = 'Bearer ' + AppStorage.getToken();
+window.axios.defaults.headers.common['Authorization'] = token;
 window.axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
 
 
