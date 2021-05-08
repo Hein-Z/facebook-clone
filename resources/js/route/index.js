@@ -8,6 +8,7 @@ import VerifyEmail from '../Views/Auth/VerifyEmail'
 import ForgotPassword from "../Views/Auth/ForgotPassword";
 import Token from "../helper/Token";
 import AppStorage from "../helper/AppStorage";
+import NotFound from '../Views/NotFound'
 
 
 Vue.use(VueRouter);
@@ -17,43 +18,49 @@ const routes = [
         name: 'home',
         path: '/',
         component: NewsFeed,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
     },
     {
         name: 'login',
         path: '/login',
         component: Login,
-        meta: {requiresAuth: false}
+        meta: { requiresAuth: false }
     },
     {
         name: 'register',
         path: '/register',
         component: Register,
-        meta: {requiresAuth: false}
+        meta: { requiresAuth: false }
     },
     {
         name: 'response-password-reset',
         path: '/response-password-reset',
         component: ResetPassword,
-        meta: {requiresAuth: false}
+        meta: { requiresAuth: false }
     },
     {
         name: 'verifyEmail',
         path: '/verify-email',
         component: VerifyEmail,
-        meta: {requiresAuth: false}
+        meta: { requiresAuth: false }
     },
     {
         name: 'forgotPassword',
         path: '/forgot-password',
         component: ForgotPassword,
-        meta: {requiresAuth: false},
+        meta: { requiresAuth: false },
     },
     {
         name: 'passwordResetform',
         path: '/password-reset-form',
         component: ResetPassword,
-        meta: {requiresAuth: false},
+        meta: { requiresAuth: false },
+    },
+    {
+        name: 'not-found',
+        path: '*',
+        component: NotFound,
+        meta: { requiresAuth: true },
     }
 ]
 

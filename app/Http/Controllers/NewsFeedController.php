@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Friend;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class NewsFeedController extends Controller
 {
@@ -35,10 +34,13 @@ class NewsFeedController extends Controller
                 },
                 'reacts as angry_count' => function ($query) {
                     $query->where('type', 'angry');
-                }
+                },
             ])->withCount('comments')
             ->latest()->paginate(5);
 
+        foreach ($posts as $post) {
+            $post->user_react_type = optional($post->reacts()->where('user_id', auth()->user()->id)->first())->type;
+        }
 
         return response()->json($posts);
 
