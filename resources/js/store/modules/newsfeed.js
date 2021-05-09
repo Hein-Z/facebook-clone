@@ -47,6 +47,18 @@ export default {
                 throw err
             });
         },
+        getPost({ commit }, post_id) {
+            return axios.get(`posts/${post_id}`)
+                .then(res => res)
+                .catch(err => {
+                    if (err.response.status === 401) {
+                        commit('auth/CLEAR_USER', {}, { root: true });
+                        commit('auth/CLEAR_TOKEN', {}, { root: true });
+                        commit('auth/CLEAR_EXPIRES_IN', {}, { root: true });
+                    }
+                    throw err
+                });
+        },
         sendReaction({ commit }, { post_id, type }) {
             return axios.post(`posts/${post_id}/add-react`, { type })
                 .then(res => res)

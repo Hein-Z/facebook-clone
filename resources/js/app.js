@@ -23,7 +23,10 @@ const options = {
 
 Vue.use(Toast, options);
 
-import {router} from "./route";
+
+
+
+import { router } from "./route";
 
 import App from './App';
 
@@ -41,10 +44,12 @@ const store = new Vuex.Store(
     storeData
 )
 
+
+
 const app = new Vue({
     el: '#app',
     router,
     store,
-    components: {App},
+    components: { App },
 });
 

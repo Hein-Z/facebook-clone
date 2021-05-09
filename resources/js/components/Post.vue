@@ -96,10 +96,9 @@ export default {
             return created_at;
         },
         profileImage() {
-            const path = "../../../";
             const profileImage =
-                path + "uploads/" + this.post.user.profile_image;
-            const defaultImage = path + "default.jpg";
+                "/uploads/" + this.post.user.profile_image;
+            const defaultImage = "/default.jpg";
 
             return this.post.user.profile_image ? profileImage : defaultImage;
         },

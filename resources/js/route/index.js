@@ -9,7 +9,7 @@ import ForgotPassword from "../Views/Auth/ForgotPassword";
 import Token from "../helper/Token";
 import AppStorage from "../helper/AppStorage";
 import NotFound from '../Views/NotFound'
-
+import ShowPost from '../Views/ShowPost'
 
 Vue.use(VueRouter);
 
@@ -19,6 +19,12 @@ const routes = [
         path: '/',
         component: NewsFeed,
         meta: { requiresAuth: true }
+    },
+    {
+        name: 'show-post',
+        path: '/posts/:post_id',
+        component: ShowPost,
+        meta: { requiresAuth: true },
     },
     {
         name: 'login',
@@ -56,6 +62,7 @@ const routes = [
         component: ResetPassword,
         meta: { requiresAuth: false },
     },
+
     {
         name: 'not-found',
         path: '*',

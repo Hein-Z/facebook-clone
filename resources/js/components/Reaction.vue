@@ -34,7 +34,7 @@
         <div class="reaction-box">
             <div class="reaction-icon" @click="react('like')">
                 <img
-                    src="reactions/like.svg"
+                    src="/reactions/like.svg"
                     alt=""
                     class="icon"
                     :class="{ show: showings[0] }"
@@ -43,7 +43,7 @@
             </div>
             <div class="reaction-icon" @click="react('love')">
                 <img
-                    src="reactions/love.svg"
+                    src="/reactions/love.svg"
                     alt=""
                     class="icon"
                     :class="{ show: showings[1] }"
@@ -53,7 +53,7 @@
             </div>
             <div class="reaction-icon" @click="react('haha')">
                 <img
-                    src="reactions/haha.svg"
+                    src="/reactions/haha.svg"
                     alt=""
                     class="icon"
                     :class="{ show: showings[2] }"
@@ -63,7 +63,7 @@
             </div>
             <div class="reaction-icon" @click="react('wow')">
                 <img
-                    src="reactions/wow.svg"
+                    src="/reactions/wow.svg"
                     alt=""
                     class="icon"
                     :class="{ show: showings[3] }"
@@ -73,7 +73,7 @@
             </div>
             <div class="reaction-icon" @click="react('sad')">
                 <img
-                    src="reactions/sad.svg"
+                    src="/reactions/sad.svg"
                     alt=""
                     class="icon"
                     :class="{ show: showings[4] }"
@@ -83,7 +83,7 @@
             </div>
             <div class="reaction-icon" @click="react('angry')">
                 <img
-                    src="reactions/angry.svg"
+                    src="/reactions/angry.svg"
                     alt=""
                     class="icon"
                     :class="{ show: showings[5] }"
