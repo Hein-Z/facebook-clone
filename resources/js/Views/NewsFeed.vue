@@ -86,7 +86,7 @@ export default {
                             return this.$router.push({ name: "login" });
                         }
                         if (err.response.data.message) {
-                            this.$toast.error(err.message);
+                            this.$toast.error(err.response.data.message);
                         }
                     });
             });

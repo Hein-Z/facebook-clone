@@ -56,13 +56,18 @@ export default {
             AppStorage.clearExpiresIn();
         },
         CLEAR_USER(state) {
-            state.user = {id: '', email: '', name: ''};
+            state.user = { id: '', email: '', name: '' };
             AppStorage.clearUser();
+        },
+        CLEAR_STORAGE({ state, commit }) {
+            commit('CLEAR_TOKEN')
+            commit('CLEAR_USER')
+            commit('CLEAR_EXPIRES_IN')
         }
     },
     actions: {
-        login({commit, state}, user) {
-            return axios.post('auth/login', {email: user.email, password: user.password}).then(response => {
+        login({ commit, state }, user) {
+            return axios.post('auth/login', { email: user.email, password: user.password }).then(response => {
                 commit('SET_USER', response.data.user);
                 commit('SET_TOKEN', response.data.access_token);
                 commit('SET_EXPIRES_IN', response.data.expires_in);
@@ -75,7 +80,7 @@ export default {
                 throw error.response
             })
         },
-        logout({commit}) {
+        logout({ commit }) {
             return axios.post('auth/logout').then(response => {
                 commit('CLEAR_USER');
                 commit('CLEAR_TOKEN');
@@ -85,7 +90,7 @@ export default {
                 throw error.response
             });
         },
-        register({commit, state}, user) {
+        register({ commit, state }, user) {
             return axios.post('auth/register', {
                 email: user.email,
                 name: user.name,
@@ -99,7 +104,7 @@ export default {
                 throw error.response
             })
         },
-        verifyEmail({commit, state}, verification_code) {
+        verifyEmail({ commit, state }, verification_code) {
             return axios.post('auth/verifyUser', {
                 email: AppStorage.getUser().email,
                 verification_code
@@ -109,21 +114,21 @@ export default {
                 throw error.response
             })
         },
-        resendCode({commit, state}) {
-            return axios.post('auth/sendVerificationCode', {email: AppStorage.getUser().email}).then(response => {
+        resendCode({ commit, state }) {
+            return axios.post('auth/sendVerificationCode', { email: AppStorage.getUser().email }).then(response => {
                 return response
             }).catch(error => {
                 throw error.response
             })
         },
-        requestPasswordForm({commit, state}, user) {
-            return axios.post('auth/sendPasswordResetLink', {email: user.email}).then(res => {
+        requestPasswordForm({ commit, state }, user) {
+            return axios.post('auth/sendPasswordResetLink', { email: user.email }).then(res => {
                 return res
             }).catch(err => {
                 throw err.response
             });
         },
-        resetPassword({commit, state}, user) {
+        resetPassword({ commit, state }, user) {
             return axios.patch('auth/resetPassword', {
                 email: user.email,
                 password: user.password,

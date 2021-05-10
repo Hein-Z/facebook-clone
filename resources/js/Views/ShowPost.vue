@@ -71,7 +71,8 @@
                                 ></reaction>
                             </div>
                             <div
-                                class="flex justify-center py-2 rounded-lg text-sm text-gray-700 w-full hover:bg-gray-200"
+                                class="flex justify-center py-2 rounded-lg text-sm text-gray-700 w-full hover:bg-gray-200 cursor-pointer"
+                                @click="showCommentForm = !showCommentForm"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -85,17 +86,39 @@
                                 <p class="ml-2 text-lg">Comment</p>
                             </div>
                         </div>
-                        <div class="flex justify-center" v-if="post.comments">
+                        <div
+                            class="flex justify-center flex-col"
+                            v-if="post.comments"
+                        >
                             <comment-box
                                 :comments="post.comments"
+                                :added_comments="added_comments"
+                                :post_id="post.id"
                             ></comment-box>
                         </div>
+                        <transition name="scale">
+                            <comment-form
+                                @addComment="addComment"
+                            ></comment-form>
+                        </transition>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+<style>
+.scale-enter-active,
+.scale-leave-active {
+    transition: all 0.5s ease;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+}
+</style>
 <script>
 import Sidebar from "../components/Sidebar";
 import Nav from "../components/Nav";
@@ -103,6 +126,7 @@ import { mapActions, mapMutations } from "vuex";
 import Reaction from "../components/Reaction";
 import moment from "moment";
 import CommentBox from "../components/CommentBox";
+import CommentForm from "../components/CommentForm";
 
 export default {
     name: "ShowPost",
@@ -110,11 +134,14 @@ export default {
         Sidebar,
         Nav,
         Reaction,
-        CommentBox
+        CommentBox,
+        CommentForm
     },
     data: () => {
         return {
-            post: {}
+            post: {},
+            showCommentForm: false,
+            added_comments: []
         };
     },
     computed: {
@@ -131,37 +158,75 @@ export default {
                     : defaultImage;
             }
             return defaultImage;
+        },
+        reacts_count() {
+            return (
+                +this.post.like_count +
+                +this.post.love_count +
+                +this.post.haha_count +
+                +this.post.sad_count +
+                +this.post.wow_count +
+                +this.post.angry_count
+            );
         }
     },
     methods: {
         ...mapActions({
             getPost: "newsfeed/getPost",
             sendReaction: "newsfeed/sendReaction",
-            removeReaction: "newsfeed/removeReaction"
+            removeReaction: "newsfeed/removeReaction",
+            clearStorage: "auth/CLEAR_STORAGE",
+            postComment: "newsfeed/postComment"
         }),
+        addComment(comment) {
+            this.postComment({ post_id: this.post.id, comment })
+                .then(res => {
+                    this.added_comments.push(res.data);
+                })
+                .catch(err => {
+                    if (err.response.status === 401) {
+                        this.clearStorage();
+                        this.$toast.warning("Please login your account");
+                        return this.$router.push({ name: "login" });
+                    }
+                    if (err.response.data.message)
+                        this.$toast.warning(error.response.data.message);
+                });
+        },
         reactPost(type) {
             this.sendReaction({ post_id: this.post.id, type })
                 .then(res => {
                     this.addReactCount(res.data.type);
-
-                    this.user_react_type = res.data.type;
+                    this.post.user_react_type = res.data.type;
                 })
                 .catch(err => {
-                    this.$toast.warning(error.type[0]);
+                    if (err.response.status === 401) {
+                        this.clearStorage();
+                        this.$toast.warning("Please login your account");
+                        return this.$router.push({ name: "login" });
+                    }
+                    if (err.response.data.type)
+                        this.$toast.warning(error.response.data.type[0]);
                 });
         },
         removeReact() {
             this.removeReaction(this.post.id)
                 .then(res => {
-                    this.removeReactCount(this.user_react_type);
+                    this.removeReactCount(this.post.user_react_type);
                     this.user_react_type = null;
                 })
                 .catch(err => {
-                    this.$toast.warning(error.message);
+                    if (err.response.status === 401) {
+                        this.clearStorage();
+                        this.$toast.warning("Please login your account");
+                        return this.$router.push({ name: "login" });
+                    }
+                    if (err.response.data.message)
+                        this.$toast.warning(err.response.data.message);
                 });
         },
         addReactCount(type) {
-            this.removeReactCount(this.user_react_type);
+            this.removeReactCount(this.post.user_react_type);
             if (type === "like") {
                 this.post.like_count++;
             } else if (type === "love") {
@@ -192,9 +257,8 @@ export default {
             }
         }
     },
-    mounted() {
+    created() {
         const post_id = this.$route.params.post_id;
-
         this.getPost(post_id)
             .then(res => {
                 this.post = res.data;
@@ -205,7 +269,7 @@ export default {
                     return this.$router.push({ name: "login" });
                 }
                 if (err.response.data.message) {
-                    this.$toast.error(err.message);
+                    this.$toast.error(err.response.data.message);
                 }
             });
     }

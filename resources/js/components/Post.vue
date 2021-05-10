@@ -11,7 +11,12 @@
                 </div>
                 <div class="ml-6">
                     <div class="text-sm font-bold">{{ post.user.name }}</div>
-                    <div class="text-sm text-gray-600">{{ createdMoment }}</div>
+                    <div
+                        class="text-sm text-gray-600 cursor-pointer"
+                        @click="showPost"
+                    >
+                        {{ createdMoment }}
+                    </div>
                 </div>
             </div>
             <div class="mt-4">
@@ -58,6 +63,7 @@
             </div>
             <div
                 class="flex justify-center py-2 rounded-lg text-sm text-gray-700 w-full hover:bg-gray-200"
+                @click="showPost"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +83,7 @@
 <script>
 import moment from "moment";
 import Reaction from "../components/Reaction";
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
     name: "Post",
@@ -96,8 +102,7 @@ export default {
             return created_at;
         },
         profileImage() {
-            const profileImage =
-                "/uploads/" + this.post.user.profile_image;
+            const profileImage = "/uploads/" + this.post.user.profile_image;
             const defaultImage = "/default.jpg";
 
             return this.post.user.profile_image ? profileImage : defaultImage;
@@ -116,8 +121,15 @@ export default {
     methods: {
         ...mapActions({
             sendReaction: "newsfeed/sendReaction",
-            removeReaction: "newsfeed/removeReaction"
+            removeReaction: "newsfeed/removeReaction",
+            clearStorage: "auth/CLEAR_STORAGE"
         }),
+        showPost() {
+            this.$router.push({
+                name: "show-post",
+                params: { post_id: this.post.id }
+            });
+        },
         reactPost(type) {
             this.sendReaction({ post_id: this.post.id, type })
                 .then(res => {
@@ -126,7 +138,13 @@ export default {
                     this.user_react_type = res.data.type;
                 })
                 .catch(err => {
-                    this.$toast.warning(error.type[0]);
+                    if (err.response.status === 401) {
+                        this.clearStorage();
+                        this.$toast.warning("Please login your account");
+                        return this.$router.push({ name: "login" });
+                    }
+                    if (err.respone.data.type)
+                        this.$toast.warning(err.response.data.type[0]);
                 });
         },
         removeReact() {
@@ -136,7 +154,13 @@ export default {
                     this.user_react_type = null;
                 })
                 .catch(err => {
-                    this.$toast.warning(error.message);
+                    if (err.response.status === 401) {
+                        this.clearStorage();
+                        this.$toast.warning("Please login your account");
+                        return this.$router.push({ name: "login" });
+                    }
+                    if (err.response.data.message)
+                        this.$toast.warning(err.response.data.message);
                 });
         },
         addReactCount(type) {

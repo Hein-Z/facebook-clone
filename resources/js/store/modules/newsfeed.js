@@ -5,7 +5,7 @@ export default {
     state: {
         posts: [],
         current_page: '',
-        last_page: ''
+        last_page: '',
     },
     mutations: {
         SET_POSTS(state, posts) {
@@ -25,6 +25,7 @@ export default {
         getPosts(state) {
             return state.posts
         },
+
         getCurrentPage(state) {
             return state.current_page
         },
@@ -62,12 +63,15 @@ export default {
         sendReaction({ commit }, { post_id, type }) {
             return axios.post(`posts/${post_id}/add-react`, { type })
                 .then(res => res)
-                .catch(err => { throw err.data });
+                .catch(err => { throw err });
         },
         removeReaction({ commit }, post_id) {
             return axios.post(`posts/${post_id}/remove-react`)
                 .then(res => res)
-                .catch(err => { throw err.data });
+                .catch(err => { throw err });
+        },
+        postComment({ commit }, { post_id, comment },) {
+            return axios.post(`posts/${post_id}/comments`, { comment }).then(res => res).catch(err => { throw err });
         }
     }
 }

@@ -14,7 +14,7 @@ class PostCommentController extends Controller
     public function index($post_id)
     {
         try {
-            $post_comment = Post::findOrFail($post_id)->comments()->with('user')->latest()->paginate(10);
+            $post_comment = Post::findOrFail($post_id)->comments()->with('user')->latest()->paginate(5);
         }catch (ModelNotFoundException $e){
             throw new PostNotFoundException();
         }
