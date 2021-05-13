@@ -24,7 +24,7 @@ class UserPostController extends Controller
     public function index($user_id)
     {
         try {
-            $user = User::with('images')->findOrFail($user_id);
+            $user = User::findOrFail($user_id);
         } catch (ModelNotFoundException $e) {
             throw new UserNotFoundException();
         }

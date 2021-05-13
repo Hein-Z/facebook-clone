@@ -26,6 +26,38 @@ class Friend extends Model
             ->first();
     }
 
+    public static function friendshipStatus($user_id)
+    {
+        $auth_id = auth()->user()->id;
+
+
+        if ($auth_id == $user_id) {
+            return 'auth user';
+        }
+
+        $friendship = (new static())
+            ->where(function ($query) use ($user_id, $auth_id) {
+                return $query->where('user_id', $auth_id)
+                    ->where('friend_id', $user_id);
+            })
+            ->orWhere(function ($query) use ($user_id, $auth_id) {
+                return $query->where('friend_id', $auth_id)
+                    ->where('user_id', $user_id);
+            })->first();
+
+        if ($friendship) {
+            if ($friendship->accepted_at != null) {
+                return 'friend';
+            } else if ($friendship->user_id == $user_id) {
+                return 'get request';
+            } else if ($friendship->friend_id == $user_id) {
+                return 'pending';
+            }
+        }
+
+        return 'not friend';
+    }
+
     public static function friendships()
     {
         return (new static())

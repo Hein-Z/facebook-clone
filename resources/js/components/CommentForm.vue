@@ -43,8 +43,9 @@ export default {
     methods: {
         addComment() {
             if (!this.comment) return;
-            this.comment = "";
+
             this.$emit("addComment", this.comment);
+            this.comment = "";
         }
     }
 };

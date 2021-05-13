@@ -50,7 +50,7 @@
                                         d="M20.8 15.6c.4-.5.6-1.1.6-1.7 0-.6-.3-1.1-.5-1.4.3-.7.4-1.7-.5-2.6-.7-.6-1.8-.9-3.4-.8-1.1.1-2 .3-2.1.3-.2 0-.4.1-.7.1 0-.3 0-.9.5-2.4.6-1.8.6-3.1-.1-4.1-.7-1-1.8-1-2.1-1-.3 0-.6.1-.8.4-.5.5-.4 1.5-.4 2-.4 1.5-2 5.1-3.3 6.1l-.1.1c-.4.4-.6.8-.8 1.2-.2-.1-.5-.2-.8-.2H3.7c-1 0-1.7.8-1.7 1.7v6.8c0 1 .8 1.7 1.7 1.7h2.5c.4 0 .7-.1 1-.3l1 .1c.2 0 2.8.4 5.6.3.5 0 1 .1 1.4.1.7 0 1.4-.1 1.9-.2 1.3-.3 2.2-.8 2.6-1.6.3-.6.3-1.2.3-1.6.8-.8 1-1.6.9-2.2.1-.3 0-.6-.1-.8zM3.7 20.7c-.3 0-.6-.3-.6-.6v-6.8c0-.3.3-.6.6-.6h2.5c.3 0 .6.3.6.6v6.8c0 .3-.3.6-.6.6H3.7zm16.1-5.6c-.2.2-.2.5-.1.7 0 0 .2.3.2.7 0 .5-.2 1-.8 1.4-.2.2-.3.4-.2.6 0 0 .2.6-.1 1.1-.3.5-.9.9-1.8 1.1-.8.2-1.8.2-3 .1h-.1c-2.7.1-5.4-.3-5.4-.3H8v-7.2c0-.2 0-.4-.1-.5.1-.3.3-.9.8-1.4 1.9-1.5 3.7-6.5 3.8-6.7v-.3c-.1-.5 0-1 .1-1.2.2 0 .8.1 1.2.6.4.6.4 1.6-.1 3-.7 2.1-.7 3.2-.2 3.7.3.2.6.3.9.2.3-.1.5-.1.7-.1h.1c1.3-.3 3.6-.5 4.4.3.7.6.2 1.4.1 1.5-.2.2-.1.5.1.7 0 0 .4.4.5 1 0 .3-.2.6-.5 1z"
                                     />
                                 </svg>
-                                <p>{{ post.reacts_count }}</p>
+                                <p>{{ reacts_count }}</p>
                             </div>
 
                             <div>
@@ -66,7 +66,7 @@
                             >
                                 <reaction
                                     @onReact="reactPost"
-                                    :user_react_type="post.user_react_type"
+                                    :user_react_type="user_react_type"
                                     @removeReact="removeReact"
                                 ></reaction>
                             </div>
@@ -140,6 +140,7 @@ export default {
     data: () => {
         return {
             post: {},
+            user_react_type: null,
             showCommentForm: false,
             added_comments: []
         };
@@ -181,6 +182,7 @@ export default {
         addComment(comment) {
             this.postComment({ post_id: this.post.id, comment })
                 .then(res => {
+                    console.log(res);
                     this.added_comments.push(res.data);
                 })
                 .catch(err => {
@@ -197,7 +199,7 @@ export default {
             this.sendReaction({ post_id: this.post.id, type })
                 .then(res => {
                     this.addReactCount(res.data.type);
-                    this.post.user_react_type = res.data.type;
+                    this.user_react_type = res.data.type;
                 })
                 .catch(err => {
                     if (err.response.status === 401) {
@@ -210,9 +212,10 @@ export default {
                 });
         },
         removeReact() {
+            if (!this.user_react_type) return;
             this.removeReaction(this.post.id)
                 .then(res => {
-                    this.removeReactCount(this.post.user_react_type);
+                    this.removeReactCount(this.user_react_type);
                     this.user_react_type = null;
                 })
                 .catch(err => {
@@ -226,7 +229,7 @@ export default {
                 });
         },
         addReactCount(type) {
-            this.removeReactCount(this.post.user_react_type);
+            this.removeReactCount(this.user_react_type);
             if (type === "like") {
                 this.post.like_count++;
             } else if (type === "love") {
@@ -262,6 +265,7 @@ export default {
         this.getPost(post_id)
             .then(res => {
                 this.post = res.data;
+                this.user_react_type = res.data.user_react_type;
             })
             .catch(err => {
                 if (err.response.status === 401) {

@@ -10,6 +10,7 @@ import Token from "../helper/Token";
 import AppStorage from "../helper/AppStorage";
 import NotFound from '../Views/NotFound'
 import ShowPost from '../Views/ShowPost'
+import Profile from '../Views/User/Profile'
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,12 @@ const routes = [
         path: '/posts/:post_id',
         component: ShowPost,
         meta: { requiresAuth: true },
+    },
+    {
+        name: 'user-profile',
+        path: '/users/:user_id',
+        component: Profile,
+        meta: { requiresAuth: true }
     },
     {
         name: 'login',

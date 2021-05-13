@@ -1,3 +1,4 @@
+import axios from "axios";
 import AppStorage from "../../helper/AppStorage";
 
 export default {
@@ -8,6 +9,8 @@ export default {
             email: '',
             name: '',
             email_verified_at: '',
+            profile_image: '',
+            cover_photo: ''
         },
 
     },
@@ -42,6 +45,8 @@ export default {
             state.user.email = user.email;
             state.user.name = user.name;
             state.user.id = user.id;
+            state.user.profile_image = user.profile_image;
+            state.user.cover_photo = user.cover_photo;
         },
         SET_TOKEN(state, token) {
             AppStorage.storeToken(token);
@@ -139,6 +144,19 @@ export default {
             }).catch(err => {
                 throw err.response
             })
+        },
+        fetchAuthUser({ commit, state }) {
+            return axios.post('auth/me').then(res => {
+                commit('SET_USER', res.data);
+                return res
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    commit('CLEAR_USER');
+                    commit('CLEAR_TOKEN');
+                    commit('CLEAR_EXPIRES_IN');
+                }
+                throw err.response
+            });
         }
     }
 }

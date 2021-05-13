@@ -37,19 +37,19 @@ Route::group([
 });
 
 Route::get('friends', 'Friend\AuthUserFriendController@index')->middleware('auth.jwt');
+
+Route::get('users/{user_id}/profile', 'User\UserProfileController@index')->middleware('auth.jwt');
 Route::post('users/{friend_id}/add-friend', 'Friend\FriendRequestController@store')->middleware('auth.jwt');
 Route::post('users/{user_id}/accept-friend-request', 'Friend\FriendRequestResponseController@accept')->middleware('auth.jwt');
 Route::post('users/{user_id}/ignore-friend-request', 'Friend\FriendRequestResponseController@ignore')->middleware('auth.jwt');
 Route::get('users/{user_id}/friends', 'Friend\UserFriendsController@index')->middleware('auth.jwt');
-
 Route::get('users/{user_id}/posts', 'Post\UserPostController@index')->middleware('auth.jwt');
-Route::get('posts/{post_id}', 'Post\ShowPostController@index')->middleware('auth.jwt');
 
+Route::get('posts/{post_id}', 'Post\ShowPostController@index')->middleware('auth.jwt');
 Route::resource('posts', 'Post\AuthUserPostController')->except(['create', 'edit'])->middleware('auth.jwt');
 Route::resource('posts.comments', 'Comment\AuthUserCommentController')->except(['index', 'create', 'edit'])->middleware('auth.jwt');
 Route::get('posts/{post_id}/comments', 'Post\PostCommentController@index')->middleware('auth.jwt');
 Route::get('posts/{post_id}/reacts', 'Post\PostReactController@index')->middleware('auth.jwt');
-
 Route::post('posts/{post_id}/add-react', 'React\AuthUserReactController@store')->middleware('auth.jwt');
 Route::post('posts/{post_id}/remove-react', 'React\AuthUserReactController@destroy')->middleware('auth.jwt');
 

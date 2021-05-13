@@ -1,10 +1,15 @@
 <template>
     <div>
         <div class="flex justify-center">
-            <button @click="loadComments">load more comment</button>
+            <button
+                @click="loadComments"
+                v-if="next_page <= last_page && unable_reload"
+            >
+                load more comment
+            </button>
         </div>
         <comment
-            v-for="comment in comments_data"
+            v-for="comment in reverse(comments_data)"
             :key="comment.id"
             :comment="comment"
         ></comment>
@@ -24,7 +29,8 @@ export default {
         return {
             last_page: "",
             current_page: "",
-            comments_data: {}
+            comments_data: {},
+            unable_reload: true
         };
     },
     computed: {
@@ -40,17 +46,21 @@ export default {
             clearStorage: "auth/CLEAR_STORAGE"
         }),
         loadComments() {
+            this.unable_reload = false;
             if (this.next_page > this.last_page) {
                 return;
             }
             axios
                 .get(`posts/${this.post_id}/comments?page=` + this.next_page)
                 .then(response => {
-                    this.comments_data.unshift(...response.data.data);
+                    this.unable_reload = true;
+                    this.comments_data.push(...response.data.data);
                     this.current_page = response.data.current_page;
                     this.last_page = response.data.last_page;
                 })
                 .catch(err => {
+                    this.unable_reload = true;
+
                     if (err.response.status === 401) {
                         this.clearStorage();
                         this.$toast.warning("Please login your account");

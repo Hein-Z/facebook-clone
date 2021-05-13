@@ -148,6 +148,7 @@ export default {
                 });
         },
         removeReact() {
+            if (!this.user_react_type) return;
             this.removeReaction(this.post.id)
                 .then(res => {
                     this.removeReactCount(this.user_react_type);
