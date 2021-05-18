@@ -55,7 +55,7 @@
             <div class="flex">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
+                    view="0 0 24 24"
                     class="fill-current w-5 h-5"
                 >
                     <path
@@ -86,7 +86,7 @@
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
+                    view="0 0 24 24"
                     class="fill-current w-7 h-7"
                 >
                     <path
@@ -141,7 +141,7 @@ export default {
         ...mapActions({
             sendReaction: "newsfeed/sendReaction",
             removeReaction: "newsfeed/removeReaction",
-            clearStorage: "auth/CLEAR_STORAGE"
+            clearStorage: "auth/clearStorage"
         }),
         showPost() {
             this.$router.push({

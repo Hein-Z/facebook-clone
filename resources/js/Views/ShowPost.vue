@@ -12,7 +12,9 @@
                                     :to="{
                                         name: 'user-profile',
                                         params: {
-                                            user_id: post.user.id
+                                            user_id: post.user
+                                                ? post.user.id
+                                                : null
                                         }
                                     }"
                                     tag="div"
@@ -31,7 +33,9 @@
                                         :to="{
                                             name: 'user-profile',
                                             params: {
-                                                user_id: post.user.id
+                                                user_id: post.user
+                                                    ? post.user.id
+                                                    : null
                                             }
                                         }"
                                     >
@@ -200,7 +204,6 @@ export default {
         addComment(comment) {
             this.postComment({ post_id: this.post.id, comment })
                 .then(res => {
-                    console.log(res);
                     this.added_comments.push(res.data);
                 })
                 .catch(err => {

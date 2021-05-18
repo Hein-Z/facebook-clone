@@ -21,7 +21,7 @@
     </div>
 </template>
 <script>
-import { mapMutations } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import Comment from "../components/Comment";
 export default {
     props: ["comments", "post_id", "added_comments"],
@@ -42,8 +42,8 @@ export default {
         Comment
     },
     methods: {
-        ...mapMutations({
-            clearStorage: "auth/CLEAR_STORAGE"
+        ...mapActions({
+            clearStorage: "auth/clearStorage"
         }),
         loadComments() {
             this.unable_reload = false;
@@ -75,6 +75,10 @@ export default {
         this.comments_data = this.comments.data;
         this.current_page = this.comments.current_page;
         this.last_page = this.comments.last_page;
+
+        Echo.channel("comment-channel").listen("new-comment", e => {
+            console.log(e);
+        });
     }
 };
 </script>

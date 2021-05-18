@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Traits\SendVerificationCode;
-use App\Mail\UserVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 
 class UserVerificationController extends Controller
 {
@@ -17,26 +14,31 @@ class UserVerificationController extends Controller
 
     public function verifyUser(Request $request)
     {
-        $check = DB::table('user_verifications')->where('verification_code', $request->verification_code)->first();
+        $checks = DB::table('user_verifications')->where('verification_code', $request->verification_code)->get();
 
-        if (!is_null($check)) {
-            $user = User::find($check->user_id);
+        if (!$checks->isEmpty()) {
+            foreach ($checks as $check) {
+                $check_user = User::find($check->user_id);
+                if ($check_user->email === $request->email) {
+                    $user = $check_user;
+                }
+            }
 
-            if ($user->email !== $request->email) {
+            if (!isset($user)) {
                 return response()->json(['message' => "Verification code or email is invalid."], 404);
             }
 
             if ($user->email_verified_at) {
                 return response()->json([
-                    'message' => 'Account already verified..'
+                    'message' => 'Account already verified..',
                 ]);
             }
 
             $user->update(['email_verified_at' => now()]);
-            DB::table('user_verifications')->where('verification_code', $request->verification_code)->delete();
+            DB::table('user_verifications')->where('verification_code', $request->verification_code)->where('user_id', $user->id)->delete();
 
             return response()->json([
-                'message' => 'You have successfully verified your email address.'
+                'message' => 'You have successfully verified your email address.',
             ]);
         }
 
@@ -54,4 +56,3 @@ class UserVerificationController extends Controller
             'message' => 'verification code sent']);
     }
 }
-

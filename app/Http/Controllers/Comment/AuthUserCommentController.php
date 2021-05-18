@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Comment;
 
+use App\Events\CommentEvent;
 use App\Exceptions\CommentNotFoundException;
 use App\Exceptions\PostNotFoundException;
 use App\Http\Controllers\Controller;
-
 use App\Models\Comment;
 use App\Models\Post;
-
-
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -38,7 +36,7 @@ class AuthUserCommentController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'comment' => 'required'
+            'comment' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -51,6 +49,8 @@ class AuthUserCommentController extends Controller
         ]);
 
         $comment->user = $comment->user;
+
+        event(new CommentEvent($comment));
         return response()->json($comment);
     }
 
@@ -63,7 +63,7 @@ class AuthUserCommentController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'comment' => 'required'
+            'comment' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -73,7 +73,6 @@ class AuthUserCommentController extends Controller
         if ($comment->user_id !== auth()->user()->id) {
             return response()->json(['message' => 'You are unauthorized to edit this post'], 401);
         }
-
 
         try {
             $comment = $post->comments()->findOrFail($comment->id);
@@ -100,7 +99,6 @@ class AuthUserCommentController extends Controller
         if ($comment->user_id !== auth()->user()->id) {
             return response()->json(['message' => 'You are unauthorized to delete this post'], 401);
         }
-
 
         try {
             $comment = $post->comments()->findOrFail($comment->id);
