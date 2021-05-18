@@ -3083,11 +3083,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     addComment: function addComment(comment) {
       var _this = this;
 
+      if (!comment.trim()) return;
       this.postComment({
         post_id: this.post.id,
         comment: comment
-      }).then(function (res) {
-        _this.added_comments.push(res.data);
+      }).then(function (res) {// this.added_comments.push(res.data);
+        // this.post.comments_count++;
       })["catch"](function (err) {
         if (err.status === 401) {
           _this.clearStorage();
@@ -3200,6 +3201,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (err.data.message) {
         _this4.$toast.error(err.data.message);
       }
+    });
+    Echo.channel("comment.post." + post_id).listen("CommentEvent", function (e) {
+      _this4.added_comments.push(e.comment);
+
+      _this4.post.comments_count++;
     });
   }
 });
@@ -3531,9 +3537,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.comments_data = this.comments.data;
     this.current_page = this.comments.current_page;
     this.last_page = this.comments.last_page;
-    Echo.channel("comment-channel").listen("new-comment", function (e) {
-      console.log(e);
-    });
   }
 });
 

@@ -49,8 +49,7 @@ class AuthUserCommentController extends Controller
         ]);
 
         $comment->user = $comment->user;
-
-        event(new CommentEvent($comment));
+        CommentEvent::dispatch($comment, $post->id);
         return response()->json($comment);
     }
 

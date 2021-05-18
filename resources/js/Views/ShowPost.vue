@@ -202,9 +202,11 @@ export default {
             postComment: "newsfeed/postComment"
         }),
         addComment(comment) {
+            if (!comment.trim()) return;
             this.postComment({ post_id: this.post.id, comment })
                 .then(res => {
-                    this.added_comments.push(res.data);
+                    // this.added_comments.push(res.data);
+                    // this.post.comments_count++;
                 })
                 .catch(err => {
                     if (err.status === 401) {
@@ -295,6 +297,10 @@ export default {
                     this.$toast.error(err.data.message);
                 }
             });
+        Echo.channel("comment.post." + post_id).listen("CommentEvent", e => {
+            this.added_comments.push(e.comment);
+            this.post.comments_count++;
+        });
     }
 };
 </script>
