@@ -11,7 +11,7 @@ trait SendVerificationCode
 {
     public function sendVerificationCode($user_id, $user_name, $user_email)
     {
-        $verification_code = substr(str_shuffle("0123456789"), 0, 8);
+        $verification_code = substr(str_shuffle("0123456789"), 0, 6);
 
         DB::table('user_verifications')->upsert([
             ['user_id' => $user_id, 'verification_code' => $verification_code]
