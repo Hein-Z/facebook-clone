@@ -7,7 +7,14 @@
             <div class="overflow-x-hidden w-4/5">
                 <div class="flex flex-col items-center py-4 ">
                     <NewPost />
-                    <Post v-for="post in posts" :key="post.id" :post="post" />
+                    <Post
+                        v-for="post in posts"
+                        :key="post.id"
+                        :post="post"
+                        :author_profile_image="post.user.profile_image"
+                        :author_id="post.user.id"
+                        :author_name="post.user.name"
+                    />
                 </div>
                 <infinite-loading
                     @infinite="infiniteHandler"
@@ -81,12 +88,12 @@ export default {
                         resolve("done");
                     })
                     .catch(err => {
-                        if (err.response.status === 401) {
+                        if (err.status === 401) {
                             this.$toast.warning("Please login your account");
                             return this.$router.push({ name: "login" });
                         }
-                        if (err.response.data.message) {
-                            this.$toast.error(err.response.data.message);
+                        if (err.data.message) {
+                            this.$toast.error(err.data.message);
                         }
                     });
             });

@@ -40,8 +40,11 @@ Route::get('friends', 'Friend\AuthUserFriendController@index')->middleware('auth
 
 Route::get('users/{user_id}/profile', 'User\UserProfileController@index')->middleware('auth.jwt');
 Route::post('users/{friend_id}/add-friend', 'Friend\FriendRequestController@store')->middleware('auth.jwt');
+Route::post('users/{friend_id}/cancel-friend-request', 'Friend\FriendRequestController@destroy')->middleware('auth.jwt');
 Route::post('users/{user_id}/accept-friend-request', 'Friend\FriendRequestResponseController@accept')->middleware('auth.jwt');
 Route::post('users/{user_id}/ignore-friend-request', 'Friend\FriendRequestResponseController@ignore')->middleware('auth.jwt');
+Route::post('users/{user_id}/unfriend', 'Friend\AuthUserFriendController@unfriend')->middleware('auth.jwt');
+
 Route::get('users/{user_id}/friends', 'Friend\UserFriendsController@index')->middleware('auth.jwt');
 Route::get('users/{user_id}/posts', 'Post\UserPostController@index')->middleware('auth.jwt');
 

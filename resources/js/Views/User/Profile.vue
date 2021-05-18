@@ -7,7 +7,7 @@
             <div class="overflow-x-hidden w-4/5">
                 <div class="flex flex-col items-center py-4 ">
                     <div class="flex flex-col items-center">
-                        <div class="relative mb-8">
+                        <div class="relative mb-10">
                             <div class="w-100 h-64 overflow-hidden z-10">
                                 <img
                                     src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -19,41 +19,47 @@
                             <div
                                 class="absolute flex items-center bottom-0 left-0 -mb-14 ml-12 z-20"
                             >
-                                <div class="w-32 h-32 rounded-full overflow-hidden border-4">
-                                        <img
-                                            src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                            alt="Profile Image"
-                                            class="shadow w-full h-full align-middle border-blue-400 border-solid  object-cover"
-                                        />
+                                <div
+                                    class="w-32 h-32 rounded-full overflow-hidden border-4"
+                                >
+                                    <img
+                                        src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                        alt="Profile Image"
+                                        class="shadow w-full h-full align-middle border-blue-400 border-solid  object-cover"
+                                    />
                                 </div>
 
                                 <p
                                     class="text-2xl -mb-14 text-gray-700 ml-4 font-extrabold"
                                 >
-                                    User Name
+                                    {{ user.name }}
                                 </p>
                             </div>
 
-                            <div
-                                class="absolute flex items-center bottom-0 right-0 mb-4 mr-12 z-20"
-                            >
-                                <!-- <button class="py-1 px-3 bg-gray-400 rounded" >Add Friend</button> -->
-                                <button
-                                    class="mr-2 py-1 px-3 bg-blue-500 rounded"
-                                >
-                                    Accept
-                                </button>
-                                <button class="py-1 px-3 bg-gray-400 rounded">
-                                    Ignore
-                                </button>
-                            </div>
+                            <friend-btn
+                                :friendshipStatus="friendshipStatus"
+                                @update="setFriendshipStatus"
+                                v-if="friendshipStatus !== 'auth user'"
+                            ></friend-btn>
                         </div>
 
-                        <!-- <div v-if="status.posts === 'loading'">Loading posts...</div>
+                        <div v-if="isLoading">
+                            Loading posts...
+                        </div>
 
-        <div v-else-if="posts.length < 1">No posts found. Get started...</div> -->
+                        <div v-else-if="posts.length < 1">
+                            No posts found. Get started...
+                        </div>
 
-                        <!-- <Post v-else v-for="(post, postKey) in posts.data" :key="postKey" :post="post" /> -->
+                        <Post
+                            v-else
+                            v-for="(post, postKey) in posts"
+                            :key="postKey"
+                            :post="post"
+                            :author_id="user.id"
+                            :author_name="user.name"
+                            :author_profile_image="user.profile_image"
+                        />
                     </div>
                 </div>
             </div>
@@ -65,32 +71,62 @@
 import Post from "../../components/Post";
 import Nav from "../../components/Nav";
 import Sidebar from "../../components/Sidebar";
+import FriendBtn from "../../components/FriendBtn";
 
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
     name: "profile",
-
+    data() {
+        return {
+            isLoading: false
+        };
+    },
     components: {
         Post,
         Nav,
-        Sidebar
+        Sidebar,
+        FriendBtn
+    },
+    computed: {
+        ...mapGetters({
+            friendshipStatus: "profile/getFriendshipStatus",
+            posts: "profile/getPosts",
+            user: "profile/getUser"
+        })
+    },
+    methods: {
+        ...mapActions({
+            fetchUser: "profile/fetchUser"
+        }),
+        ...mapMutations({
+            setUser: "profile/SET_USER",
+            setFriendshipStatus: "profile/SET_FRIENDSHIP_STATUS",
+            setPosts: "profile/SET_POSTS",
+            setCurrentPage: "profile/SET_CURRENT_PAGE",
+            setLastPage: "profile/SET_LAST_PAGE"
+        }),
+    },
+    created() {
+        this.isLoading = true;
+        this.fetchUser(this.$route.params.user_id)
+            .then(res => {
+                this.setUser(res.data.user);
+                this.setPosts(res.data.user.posts.data);
+                this.setLastPage(res.data.user.posts.last_page);
+                this.setCurrentPage(res.data.user.posts.current_page);
+            })
+            .catch(err => {
+                if (err.status === 401) {
+                    this.$toast.warning("Please login your account");
+                    return this.$router.push({ name: "login" });
+                }
+                if (err.data.message) {
+                    this.$toast.error(err.data.message);
+                    return this.$router.back();
+                }
+            })
+            .finally(_ => (this.isLoading = false));
     }
-
-    // mounted() {
-    //     this.$store.dispatch('fetchUser', this.$route.params.userId);
-    //     this.$store.dispatch('fetchUserPosts', this.$route.params.userId);
-    // },
-
-    // computed: {
-    //     ...mapGetters({
-    //         user: 'user',
-    //         posts: 'posts',
-    //         status: 'status',
-    //         friendButtonText: 'friendButtonText',
-    //     }),
-    // }
 };
 </script>
-
-<style scoped></style>

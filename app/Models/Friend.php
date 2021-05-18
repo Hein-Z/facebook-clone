@@ -30,7 +30,6 @@ class Friend extends Model
     {
         $auth_id = auth()->user()->id;
 
-
         if ($auth_id == $user_id) {
             return 'auth user';
         }

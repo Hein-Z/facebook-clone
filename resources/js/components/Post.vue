@@ -2,15 +2,34 @@
     <div class="bg-white rounded shadow w-2/3 mt-6 relative">
         <div class="flex flex-col p-4">
             <div class="flex items-center">
-                <div class="w-8">
+                <router-link
+                    tag="div"
+                    :to="{
+                        name: 'user-profile',
+                        params: {
+                            user_id: author_id
+                        }
+                    }"
+                    class="w-8 cursor-pointer"
+                >
                     <img
                         :src="profileImage"
                         alt="profile image for user"
                         class="w-8 h-8 object-cover rounded-full"
                     />
-                </div>
+                </router-link>
                 <div class="ml-6">
-                    <div class="text-sm font-bold">{{ post.user.name }}</div>
+                    <router-link
+                        tag="div"
+                        :to="{
+                            name: 'user-profile',
+                            params: {
+                                user_id: author_id
+                            }
+                        }"
+                        class="text-sm font-bold cursor-pointer"
+                        >{{ author_name }}</router-link
+                    >
                     <div
                         class="text-sm text-gray-600 cursor-pointer"
                         @click="showPost"
@@ -87,7 +106,7 @@ import { mapActions, mapMutations } from "vuex";
 
 export default {
     name: "Post",
-    props: ["post"],
+    props: ["post", "author_name", "author_profile_image", "author_id"],
     data() {
         return {
             user_react_type: this.post.user_react_type
@@ -102,10 +121,10 @@ export default {
             return created_at;
         },
         profileImage() {
-            const profileImage = "/uploads/" + this.post.user.profile_image;
+            const profileImage = "/uploads/" + this.author_profile_image;
             const defaultImage = "/default.jpg";
 
-            return this.post.user.profile_image ? profileImage : defaultImage;
+            return this.author_profile_image ? profileImage : defaultImage;
         },
         reacts_count() {
             return (
@@ -138,13 +157,12 @@ export default {
                     this.user_react_type = res.data.type;
                 })
                 .catch(err => {
-                    if (err.response.status === 401) {
+                    if (err.status === 401) {
                         this.clearStorage();
                         this.$toast.warning("Please login your account");
                         return this.$router.push({ name: "login" });
                     }
-                    if (err.respone.data.type)
-                        this.$toast.warning(err.response.data.type[0]);
+                    if (err.data.type) this.$toast.warning(err.data.type[0]);
                 });
         },
         removeReact() {
@@ -155,13 +173,12 @@ export default {
                     this.user_react_type = null;
                 })
                 .catch(err => {
-                    if (err.response.status === 401) {
+                    if (err.status === 401) {
                         this.clearStorage();
                         this.$toast.warning("Please login your account");
                         return this.$router.push({ name: "login" });
                     }
-                    if (err.response.data.message)
-                        this.$toast.warning(err.response.data.message);
+                    if (err.data.message) this.$toast.warning(err.data.message);
                 });
         },
         addReactCount(type) {

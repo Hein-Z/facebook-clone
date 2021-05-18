@@ -21,7 +21,7 @@ export default {
                     return this.$router.push({ name: "login" });
                 }
                 if (err.data.message) {
-                    this.$toast.error(err.response.data.message);
+                    this.$toast.error(err.data.message);
                 }
             });
     }

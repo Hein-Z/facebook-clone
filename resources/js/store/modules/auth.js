@@ -63,14 +63,14 @@ export default {
         CLEAR_USER(state) {
             state.user = { id: '', email: '', name: '' };
             AppStorage.clearUser();
-        },
-        CLEAR_STORAGE({ state, commit }) {
-            commit('CLEAR_TOKEN')
-            commit('CLEAR_USER')
-            commit('CLEAR_EXPIRES_IN')
         }
     },
     actions: {
+        clearStorage({ commit }) {
+            commit('CLEAR_TOKEN')
+            commit('CLEAR_USER')
+            commit('CLEAR_EXPIRES_IN')
+        },
         login({ commit, state }, user) {
             return axios.post('auth/login', { email: user.email, password: user.password }).then(response => {
                 commit('SET_USER', response.data.user);
@@ -87,15 +87,13 @@ export default {
         },
         logout({ commit }) {
             return axios.post('auth/logout').then(response => {
-                commit('CLEAR_USER');
-                commit('CLEAR_TOKEN');
-                commit('CLEAR_EXPIRES_IN');
+                commit('clearStorage');
                 return response
             }).catch(error => {
                 throw error.response
             });
         },
-        register({ commit, state }, user) {
+        register({ commit, state, dispatch }, user) {
             return axios.post('auth/register', {
                 email: user.email,
                 name: user.name,
@@ -105,7 +103,7 @@ export default {
                 commit('SET_USER', user);
                 return response
             }).catch(error => {
-                commit('SET_USER', {})
+                dispatch('clearStorage');
                 throw error.response
             })
         },
@@ -145,15 +143,13 @@ export default {
                 throw err.response
             })
         },
-        fetchAuthUser({ commit, state }) {
+        fetchAuthUser({ commit, statem, dispatch }) {
             return axios.post('auth/me').then(res => {
                 commit('SET_USER', res.data);
                 return res
             }).catch(err => {
                 if (err.response.status === 401) {
-                    commit('CLEAR_USER');
-                    commit('CLEAR_TOKEN');
-                    commit('CLEAR_EXPIRES_IN');
+                    dispatch('clearStorage');
                 }
                 throw err.response
             });

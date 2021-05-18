@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use phpDocumentor\Reflection\DocBlock\Tags\Reference\Url;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -24,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'email_verified_at',
         'profile_image',
-        'cover_photo'
+        'cover_photo',
     ];
 
     /**
@@ -51,7 +49,6 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
-
 
     public function getJWTIdentifier()
     {
@@ -80,18 +77,23 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Post::class);
     }
 
-    function friendsOfMine()
+    public function friendsOfMine()
     {
         return $this->belongsToMany(User::class, Friend::class, 'user_id', 'friend_id')
             ->wherePivot('accepted_at', '!=', null) // to filter only accepted
             ->withPivot('accepted_at'); // or to fetch accepted value
     }
 
-    function friendOf()
+    public function friendOf()
     {
         return $this->belongsToMany(User::class, Friend::class, 'friend_id', 'user_id')
             ->wherePivot('accepted_at', '!=', null)
             ->withPivot('accepted_at');
+    }
+
+    public function friendRequests()
+    {
+        return $this->belongsToMany(User::class, Friend::class, 'friend_id', 'user_id');
     }
 
     public function getFriendsAttribute()

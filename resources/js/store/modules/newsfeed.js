@@ -39,59 +39,57 @@ export default {
     },
     actions: {
         fetchPosts({ dispatch, commit }) {
-            return axios.get('news-feed').then(res => res).catch(err => {
+            return axios.get('news-feed').then(res =>
+                 res
+            ).catch(err => {
                 if (err.response.status === 401) {
-                    commit('auth/CLEAR_USER', {}, { root: true });
-                    commit('auth/CLEAR_TOKEN', {}, { root: true });
-                    commit('auth/CLEAR_EXPIRES_IN', {}, { root: true });
+                    dispatch('auth/clearStorage', {}, { root: true });
                 }
-                throw err
+                throw err.response
             });
         },
-        getPost({ commit }, post_id) {
+        getPost({ commit, dispatch }, post_id) {
             return axios.get(`posts/${post_id}`)
                 .then(res => res)
                 .catch(err => {
                     if (err.response.status === 401) {
-                        commit('auth/CLEAR_USER', {}, { root: true });
-                        commit('auth/CLEAR_TOKEN', {}, { root: true });
-                        commit('auth/CLEAR_EXPIRES_IN', {}, { root: true });
+                        dispatch('auth/clearStorage', {}, { root: true });
                     }
-                    throw err
+                    throw err.response
+
                 });
         },
-        sendReaction({ commit }, { post_id, type }) {
+        sendReaction({ commit, dispatch }, { post_id, type }) {
             return axios.post(`posts/${post_id}/add-react`, { type })
                 .then(res => res)
                 .catch(err => {
                     if (err.response.status === 401) {
-                        commit('auth/CLEAR_USER', {}, { root: true });
-                        commit('auth/CLEAR_TOKEN', {}, { root: true });
-                        commit('auth/CLEAR_EXPIRES_IN', {}, { root: true });
+                        dispatch('auth/clearStorage', {}, { root: true });
                     }
-                    throw err
+                    throw err.response
+
                 });
         },
-        removeReaction({ commit }, post_id) {
+        removeReaction({ commit, dispatch }, post_id) {
             return axios.post(`posts/${post_id}/remove-react`)
                 .then(res => res)
                 .catch(err => {
                     if (err.response.status === 401) {
-                        commit('auth/CLEAR_USER', {}, { root: true });
-                        commit('auth/CLEAR_TOKEN', {}, { root: true });
-                        commit('auth/CLEAR_EXPIRES_IN', {}, { root: true });
+                        dispatch('auth/clearStorage', {}, { root: true });
+
                     }
-                    throw err
+                    throw err.response
+
                 });
         },
-        postComment({ commit }, { post_id, comment }) {
+        postComment({ commit, dispatch }, { post_id, comment }) {
             return axios.post(`posts/${post_id}/comments`, { comment }).then(res => res).catch(err => {
                 if (err.response.status === 401) {
-                    commit('auth/CLEAR_USER', {}, { root: true });
-                    commit('auth/CLEAR_TOKEN', {}, { root: true });
-                    commit('auth/CLEAR_EXPIRES_IN', {}, { root: true });
+                    dispatch('auth/clearStorage', {}, { root: true });
+
                 }
-                throw err
+                throw err.response
+
             });
         }
     }

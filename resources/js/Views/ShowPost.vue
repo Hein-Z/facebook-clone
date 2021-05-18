@@ -8,17 +8,35 @@
                     <div class="bg-white rounded shadow w-2/3 mt-6 relative">
                         <div class="flex flex-col p-4">
                             <div class="flex items-center">
-                                <div class="w-8">
+                                <router-link
+                                    :to="{
+                                        name: 'user-profile',
+                                        params: {
+                                            user_id: post.user.id
+                                        }
+                                    }"
+                                    tag="div"
+                                    class="w-8 cursor-pointer"
+                                >
                                     <img
                                         :src="profileImage"
                                         alt="profile image for user"
                                         class="w-8 h-8 object-cover rounded-full"
                                     />
-                                </div>
+                                </router-link>
                                 <div class="ml-6">
-                                    <div class="text-sm font-bold">
+                                    <router-link
+                                        tag="div"
+                                        class="text-sm font-bold cursor-pointer"
+                                        :to="{
+                                            name: 'user-profile',
+                                            params: {
+                                                user_id: post.user.id
+                                            }
+                                        }"
+                                    >
                                         {{ post.user ? post.user.name : "" }}
-                                    </div>
+                                    </router-link>
                                     <div class="text-sm text-gray-600">
                                         {{ createdMoment }}
                                     </div>
@@ -186,13 +204,13 @@ export default {
                     this.added_comments.push(res.data);
                 })
                 .catch(err => {
-                    if (err.response.status === 401) {
+                    if (err.status === 401) {
                         this.clearStorage();
                         this.$toast.warning("Please login your account");
                         return this.$router.push({ name: "login" });
                     }
-                    if (err.response.data.message)
-                        this.$toast.warning(error.response.data.message);
+                    if (err.data.message)
+                        this.$toast.warning(error.data.message);
                 });
         },
         reactPost(type) {
@@ -202,13 +220,12 @@ export default {
                     this.user_react_type = res.data.type;
                 })
                 .catch(err => {
-                    if (err.response.status === 401) {
+                    if (err.status === 401) {
                         this.clearStorage();
                         this.$toast.warning("Please login your account");
                         return this.$router.push({ name: "login" });
                     }
-                    if (err.response.data.type)
-                        this.$toast.warning(error.response.data.type[0]);
+                    if (err.data.type) this.$toast.warning(error.data.type[0]);
                 });
         },
         removeReact() {
@@ -219,13 +236,12 @@ export default {
                     this.user_react_type = null;
                 })
                 .catch(err => {
-                    if (err.response.status === 401) {
+                    if (err.status === 401) {
                         this.clearStorage();
                         this.$toast.warning("Please login your account");
                         return this.$router.push({ name: "login" });
                     }
-                    if (err.response.data.message)
-                        this.$toast.warning(err.response.data.message);
+                    if (err.data.message) this.$toast.warning(err.data.message);
                 });
         },
         addReactCount(type) {
@@ -268,12 +284,12 @@ export default {
                 this.user_react_type = res.data.user_react_type;
             })
             .catch(err => {
-                if (err.response.status === 401) {
+                if (err.status === 401) {
                     this.$toast.warning("Please login your account");
                     return this.$router.push({ name: "login" });
                 }
-                if (err.response.data.message) {
-                    this.$toast.error(err.response.data.message);
+                if (err.data.message) {
+                    this.$toast.error(err.data.message);
                 }
             });
     }
