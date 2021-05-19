@@ -35,7 +35,8 @@ import Sidebar from "../components/Sidebar";
 import Nav from "../components/Nav";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import InfiniteLoading from "vue-infinite-loading";
-
+import AppStorage from "../helper/AppStorage";
+import Token from "../helper/Token";
 export default {
     name: "NewsFeed",
     components: {
@@ -61,7 +62,8 @@ export default {
             pushNewPosts: "newsfeed/PUSH_NEW_POSTS"
         }),
         ...mapActions({
-            fetchPosts: "newsfeed/fetchPosts"
+            fetchPosts: "newsfeed/fetchPosts",
+            refreshToken: "auth/refreshToken"
         }),
         infiniteHandler($state) {
             if (this.next_page > this.last_page) {
@@ -75,9 +77,9 @@ export default {
                 $state.loaded();
             });
         },
-        refresh(loaded) {
-            this.fetchData().then(_ => loaded("done"));
-        },
+        // refresh(loaded) {
+        //     this.fetchData().then(_ => loaded("done"));
+        // },
         fetchData() {
             return new Promise((resolve, reject) => {
                 this.fetchPosts()
@@ -100,7 +102,17 @@ export default {
         }
     },
     created() {
-        this.fetchData();
+        if (Token.isExpired(AppStorage.getToken())) {
+            this.refreshToken()
+                .then(res => {
+                    this.fetchData();
+                })
+                .catch(err => {
+                    this.$router.push({ name: "login" });
+                });
+        } else {
+            this.fetchData();
+        }
     }
 };
 </script>

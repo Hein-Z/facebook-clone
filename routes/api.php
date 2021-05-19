@@ -20,7 +20,7 @@ Route::group([
     Route::post('register', 'Auth\AuthController@register');
     Route::post('login', 'Auth\AuthController@login');
     Route::post('logout', 'Auth\AuthController@logout');
-    Route::post('refresh', 'Auth\AuthController@refresh');
+    Route::post('refresh', 'Auth\AuthController@refresh')->middleware('auth.jwt');
     Route::post('sendPasswordResetLink', 'Auth\PasswordResetRequestController@sendEmail');
     Route::patch('resetPassword', 'Auth\ResetPasswordController@resetPasswordProcess');
     Route::post('verifyUser', 'Auth\UserVerificationController@verifyUser');

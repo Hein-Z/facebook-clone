@@ -46,6 +46,7 @@ class AppStorage {
     clear() {
         this.clearToken();
         this.clearExpiresIn();
+        this.clearUser();
     }
 
 }

@@ -85,9 +85,24 @@ export default {
                 throw error.response
             })
         },
-        logout({ commit }) {
+        refreshToken({ commit, dispatch }) {
+            return axios.post("auth/refresh")
+                .then(res => {
+                    commit('SET_USER', res.data.user);
+                    commit('SET_TOKEN', res.data.access_token);
+                    commit('SET_EXPIRES_IN', res.data.expires_in);
+                    axios.defaults.headers.common["Authorization"] = 'Bearer ' +
+                        res.data.access_token;
+                    return res
+                })
+                .catch(err => {
+                    dispatch('clearStorage');
+                    throw err.response;
+                });
+        },
+        logout({ commit, dispatch }) {
             return axios.post('auth/logout').then(response => {
-                commit('clearStorage');
+                dispatch('clearStorage');
                 return response
             }).catch(error => {
                 throw error.response

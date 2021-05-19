@@ -11,6 +11,7 @@ import AppStorage from "../helper/AppStorage";
 import NotFound from '../Views/NotFound'
 import ShowPost from '../Views/ShowPost'
 import Profile from '../Views/User/Profile'
+import axios from "axios";
 
 Vue.use(VueRouter);
 
@@ -88,9 +89,8 @@ router.beforeEach((to, from, next) => {
         // this route requires auth, check if logged in
         // if not, redirect to login page.
         if (!Token.isValid(AppStorage.getToken())) {
-            next({
-                name: 'login',
-            })
+            AppStorage.clear();
+            next({ name: 'login' })
         } else {
             next()
         }

@@ -72,7 +72,8 @@ import Post from "../../components/Post";
 import Nav from "../../components/Nav";
 import Sidebar from "../../components/Sidebar";
 import FriendBtn from "../../components/FriendBtn";
-
+import Token from "../../helper/Token";
+import AppStorage from "../../helper/AppStorage";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -106,27 +107,42 @@ export default {
             setCurrentPage: "profile/SET_CURRENT_PAGE",
             setLastPage: "profile/SET_LAST_PAGE"
         }),
+        getUser(user_id) {
+            this.fetchUser(user_id)
+                .then(res => {
+                    this.setUser(res.data.user);
+                    this.setPosts(res.data.user.posts.data);
+                    this.setLastPage(res.data.user.posts.last_page);
+                    this.setCurrentPage(res.data.user.posts.current_page);
+                })
+                .catch(err => {
+                    if (err.status === 401) {
+                        this.$toast.warning("Please login your account");
+                        return this.$router.push({ name: "login" });
+                    }
+                    if (err.data.message) {
+                        this.$toast.error(err.data.message);
+                        return this.$router.back();
+                    }
+                })
+                .finally(_ => (this.isLoading = false));
+        }
     },
     created() {
         this.isLoading = true;
-        this.fetchUser(this.$route.params.user_id)
-            .then(res => {
-                this.setUser(res.data.user);
-                this.setPosts(res.data.user.posts.data);
-                this.setLastPage(res.data.user.posts.last_page);
-                this.setCurrentPage(res.data.user.posts.current_page);
-            })
-            .catch(err => {
-                if (err.status === 401) {
-                    this.$toast.warning("Please login your account");
-                    return this.$router.push({ name: "login" });
-                }
-                if (err.data.message) {
-                    this.$toast.error(err.data.message);
-                    return this.$router.back();
-                }
-            })
-            .finally(_ => (this.isLoading = false));
+        let user_id = this.$route.params.user_id;
+
+        if (Token.isExpired(AppStorage.getToken())) {
+            this.refreshToken()
+                .then(res => {
+                    this.getUser(user_id);
+                })
+                .catch(err => {
+                    this.$router.push({ name: "login" });
+                });
+        } else {
+            this.getUser(user_id);
+        }
     }
 };
 </script>

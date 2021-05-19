@@ -149,6 +149,8 @@ import Reaction from "../components/Reaction";
 import moment from "moment";
 import CommentBox from "../components/CommentBox";
 import CommentForm from "../components/CommentForm";
+import Token from "../helper/Token";
+import AppStorage from "../helper/AppStorage";
 
 export default {
     name: "ShowPost",
@@ -195,7 +197,7 @@ export default {
     },
     methods: {
         ...mapActions({
-            getPost: "newsfeed/getPost",
+            fetchPost: "newsfeed/getPost",
             sendReaction: "newsfeed/sendReaction",
             removeReaction: "newsfeed/removeReaction",
             clearStorage: "auth/CLEAR_STORAGE",
@@ -279,28 +281,49 @@ export default {
             } else if (type === "angry") {
                 this.post.angry_count--;
             }
+        },
+        getPost(post_id) {
+            this.fetchPost(post_id)
+                .then(res => {
+                    this.post = res.data;
+                    this.user_react_type = res.data.user_react_type;
+                })
+                .catch(err => {
+                    if (err.status === 401) {
+                        this.$toast.warning("Please login your account");
+                        return this.$router.push({ name: "login" });
+                    }
+                    if (err.data.message) {
+                        this.$toast.error(err.data.message);
+                    }
+                });
+        },
+        setChannel(post_id) {
+            Echo.channel("comment.post." + post_id).listen(
+                "CommentEvent",
+                e => {
+                    this.added_comments.push(e.comment);
+                    this.post.comments_count++;
+                }
+            );
         }
     },
     created() {
         const post_id = this.$route.params.post_id;
-        this.getPost(post_id)
-            .then(res => {
-                this.post = res.data;
-                this.user_react_type = res.data.user_react_type;
-            })
-            .catch(err => {
-                if (err.status === 401) {
-                    this.$toast.warning("Please login your account");
-                    return this.$router.push({ name: "login" });
-                }
-                if (err.data.message) {
-                    this.$toast.error(err.data.message);
-                }
-            });
-        Echo.channel("comment.post." + post_id).listen("CommentEvent", e => {
-            this.added_comments.push(e.comment);
-            this.post.comments_count++;
-        });
+
+        if (Token.isExpired(AppStorage.getToken())) {
+            this.refreshToken()
+                .then(res => {
+                    this.getPost(post_id);
+                    this.setChannel(post_id);
+                })
+                .catch(err => {
+                    this.$router.push({ name: "login" });
+                });
+        } else {
+            this.setChannel(post_id);
+            this.getPost(post_id);
+        }
     }
 };
 </script>

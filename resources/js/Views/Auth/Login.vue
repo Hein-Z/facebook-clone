@@ -103,9 +103,6 @@ export default {
         submit() {
             this.login(this.user)
                 .then(res => {
-                    this.setToken(res.data.access_token);
-                    this.setExpiresIn(res.data.expires_in);
-
                     this.$router.push({ name: "home" });
                 })
                 .catch(error => {

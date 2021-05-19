@@ -13,6 +13,7 @@ export default {
         })
     },
     created() {
+        if (!this.$route.meta.requiresAuth) return;
         this.fetchAuthUser()
             .then(res => res)
             .catch(err => {

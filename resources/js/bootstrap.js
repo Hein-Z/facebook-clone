@@ -29,7 +29,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 const token = 'Bearer ' + AppStorage.getToken();
 window.axios.defaults.headers.common['Authorization'] = token;
-window.axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
+window.axios.defaults.baseURL = process.env.MIX_APP_URL + '/api/';
 
 
 
@@ -46,8 +46,8 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'c9d82ec19244dd431cb5',
-    cluster: 'ap1',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true,
     auth: {
         headers: {

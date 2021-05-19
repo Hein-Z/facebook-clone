@@ -14,12 +14,30 @@ class Token {
         if (token) {
             var payload = this.payload(token);
             if (payload) {
-                return (payload.iss === "http://127.0.0.1:8000/api/auth/login");
+                return (payload.iss === process.env.MIX_APP_URL + "/api/auth/login") || (payload.iss === process.env.MIX_APP_URL + "/api/auth/refresh");
             }
         }
         return false;
     }
 
-}
+    isExpired(token) {
+        if (token) {
+            var payload = this.payload(token);
+            if (payload) {
+                return payload.exp < ((new Date().getTime() / 1000) + 1800);
+            }
+        }
+        return false;
 
+    }
+
+    expiresIn(token) {
+        if (token) {
+            var payload = this.payload(token);
+            if (payload)
+                return payload.exp;
+        }
+        return false;
+    }
+}
 export default new Token();
