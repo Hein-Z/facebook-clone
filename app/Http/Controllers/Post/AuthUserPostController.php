@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers\Post;
 
-
 use App\Exceptions\PostNotFoundException;
-use App\Exceptions\UserNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class AuthUserPostController extends Controller
@@ -51,9 +47,8 @@ class AuthUserPostController extends Controller
 
         $user = auth()->user();
 
-
         $post = $user->posts()->create([
-            'status' => $request->status
+            'status' => $request->status,
         ]);
 
         //store each image
@@ -63,8 +58,8 @@ class AuthUserPostController extends Controller
                 $imagePath = Storage::disk('uploads')->put($user->email . '/post/' . $post->id, $image);
                 PostImage::create([
                     'post_image_caption' => $request->status,
-                    'post_image_path' => 'upload/' . $imagePath,
-                    'post_id' => $post->id
+                    'post_image_path' => 'uploads/' . $imagePath,
+                    'post_id' => $post->id,
                 ]);
             }
         }
@@ -91,7 +86,6 @@ class AuthUserPostController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-
         try {
 //            $post = Post::findOrFail($id);
             $user = auth()->user();
@@ -105,7 +99,7 @@ class AuthUserPostController extends Controller
         }
 
         $post->update([
-            'status' => $request->status
+            'status' => $request->status,
         ]);
 
         Storage::disk('uploads')->deleteDirectory($user->email . '/post/' . $post->id);
@@ -118,8 +112,8 @@ class AuthUserPostController extends Controller
                 $imagePath = Storage::disk('uploads')->put($user->email . '/post/' . $post->id, $image);
                 PostImage::create([
                     'post_image_caption' => $request->status,
-                    'post_image_path' => 'upload/' . $imagePath,
-                    'post_id' => $post->id
+                    'post_image_path' => 'uploads/' . $imagePath,
+                    'post_id' => $post->id,
                 ]);
             }
         }
@@ -145,8 +139,8 @@ class AuthUserPostController extends Controller
             throw new PostNotFoundException();
         }
 
-
         $post->delete();
+        Storage::disk('uploads')->deleteDirectory(auth()->user()->email . '/post/' . $post->id);
 
         return response()->json(['message' => 'Successfully deleted'], 202);
     }

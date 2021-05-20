@@ -102,17 +102,7 @@ export default {
         }
     },
     created() {
-        if (Token.isExpired(AppStorage.getToken())) {
-            this.refreshToken()
-                .then(res => {
-                    this.fetchData();
-                })
-                .catch(err => {
-                    this.$router.push({ name: "login" });
-                });
-        } else {
-            this.fetchData();
-        }
+        this.fetchData();
     }
 };
 </script>

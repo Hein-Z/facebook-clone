@@ -311,19 +311,8 @@ export default {
     created() {
         const post_id = this.$route.params.post_id;
 
-        if (Token.isExpired(AppStorage.getToken())) {
-            this.refreshToken()
-                .then(res => {
-                    this.getPost(post_id);
-                    this.setChannel(post_id);
-                })
-                .catch(err => {
-                    this.$router.push({ name: "login" });
-                });
-        } else {
-            this.setChannel(post_id);
-            this.getPost(post_id);
-        }
+        this.setChannel(post_id);
+        this.getPost(post_id);
     }
 };
 </script>

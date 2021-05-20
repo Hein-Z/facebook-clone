@@ -101,6 +101,16 @@ class User extends Authenticatable implements JWTSubject
         return $this->friendsOfMine->merge($this->friendOf)->sortByDesc('accepted_at');
     }
 
+    public function getProfileImageAttribute($value)
+    {
+        return $value ? asset('uploads/' . $value) : "";
+    }
+
+    public function getCoverPhotoAttribute($value)
+    {
+        return $value ? asset('uploads/' . $value) : "";
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -110,4 +120,5 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(React::class);
     }
+
 }

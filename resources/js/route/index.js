@@ -91,7 +91,21 @@ router.beforeEach((to, from, next) => {
         if (!Token.isValid(AppStorage.getToken())) {
             AppStorage.clear();
             next({ name: 'login' })
-        } else {
+        } else if (Token.isExpired(AppStorage.getToken())) {
+            axios.post("auth/refresh")
+                .then(res => {
+                    AppStorage.storeToken(res.data.access_token);
+                    AppStorage.storeExpiresIn(res.data.expires_in);
+                    axios.defaults.headers.common["Authorization"] = 'Bearer ' +
+                        res.data.access_token;
+                    next();
+                })
+                .catch(err => {
+                    AppStorage.clear();
+                    next({ name: 'login' });
+                });
+        }
+        else {
             next()
         }
     } else {

@@ -24,7 +24,7 @@ class CoverPhotoController extends Controller
         $imagePath = Storage::disk('uploads')->put($user->email . '/cover-photo', $cover_photo);
 
 
-        return response()->json(['message' => 'successfully added your cover photo image', 'data' => $user->cover_photo]);
+        return response()->json(['message' => 'successfully added your cover photo image', 'data' =>asset('uploads/' . $cover_photo)]);
     }
 
     public function update(Request $request)
@@ -49,6 +49,6 @@ class CoverPhotoController extends Controller
             'cover_photo' => $imagePath
         ]);
 
-        return response()->json(['message' => 'successfully updated your cover photo', 'data' => $user->cover_photo]);
+        return response()->json(['message' => 'successfully updated your cover photo', 'data' => asset('uploads/' . $user->cover_photo)]);
     }
 }

@@ -27,8 +27,8 @@ Route::group([
     Route::post('sendVerificationCode', 'Auth\UserVerificationController@sendVerificationCodeProcess');
     Route::post('logout', 'Auth\AuthController@logout');
 
-    Route::post('upload-profile-image', 'Auth\ProfileImageController@store');
-    Route::patch('update-profile-image', 'Auth\ProfileImageController@update');
+    Route::post('upload-profile-image', 'Auth\ProfileImageController@store')->middleware('auth.jwt');
+    Route::patch('update-profile-image', 'Auth\ProfileImageController@update')->middleware('auth.jwt');
 
     Route::post('upload-cover-photo', 'Auth\CoverPhotoController@store')->middleware('auth.jwt');
     Route::patch('update-cover-photo', 'Auth\CoverPhotoController@update')->middleware('auth.jwt');

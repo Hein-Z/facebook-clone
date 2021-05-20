@@ -1,5 +1,14 @@
 <template>
     <div class="bg-white rounded shadow w-2/3 mt-6 relative">
+        <CoolLightBox
+            :items="images"
+            :index="index"
+            :useZoomBar="true"
+            @close="index = null"
+            :fullScreen="true"
+        >
+        </CoolLightBox>
+
         <div class="flex flex-col p-4">
             <div class="flex items-center">
                 <router-link
@@ -43,12 +52,20 @@
             </div>
         </div>
 
-        <div class="w-full">
-            <img
-                src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                alt="post image"
-                class="w-full"
-            />
+        <div class="w-full" v-if="post.images.length">
+            <photo-grid
+                :box-height="'600px'"
+                :excess-text="'+ {{count}}'"
+                v-on:clickExcess="triggerClick(3)"
+                class="w-full cursor-pointer"
+            >
+                <img
+                    v-for="image in images"
+                    v-bind:src="image.src"
+                    :key="image.id"
+                    @click="triggerClick(images.indexOf(image))"
+                />
+            </photo-grid>
         </div>
 
         <div class="px-4 pt-2 flex justify-between text-gray-700 text-sm">
@@ -109,7 +126,9 @@ export default {
     props: ["post", "author_name", "author_profile_image", "author_id"],
     data() {
         return {
-            user_react_type: this.post.user_react_type
+            user_react_type: this.post.user_react_type,
+            images: [],
+            index: null
         };
     },
     components: {
@@ -121,8 +140,8 @@ export default {
             return created_at;
         },
         profileImage() {
-            const profileImage = "/uploads/" + this.author_profile_image;
-            const defaultImage = "/default.jpg";
+            const profileImage = this.author_profile_image;
+            const defaultImage = process.env.MIX_APP_URL + "/default.jpg";
 
             return this.author_profile_image ? profileImage : defaultImage;
         },
@@ -211,7 +230,18 @@ export default {
             } else if (type === "angry") {
                 this.post.angry_count--;
             }
+        },
+        triggerClick(value) {
+            this.index = value;
         }
+    },
+    created() {
+        this.post.images.forEach(image => {
+            this.images.push({
+                description: image.post_image_caption,
+                src: image.post_image_path
+            });
+        });
     }
 };
 </script>

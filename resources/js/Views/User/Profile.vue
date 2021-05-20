@@ -10,7 +10,7 @@
                         <div class="relative mb-10">
                             <div class="w-100 h-64 overflow-hidden z-10">
                                 <img
-                                    src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                    :src="coverImage"
                                     alt="post image"
                                     class="object-cover w-full rounded-lg"
                                 />
@@ -23,7 +23,7 @@
                                     class="w-32 h-32 rounded-full overflow-hidden border-4"
                                 >
                                     <img
-                                        src="https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                        :src="profileImage"
                                         alt="Profile Image"
                                         class="shadow w-full h-full align-middle border-blue-400 border-solid  object-cover"
                                     />
@@ -94,7 +94,19 @@ export default {
             friendshipStatus: "profile/getFriendshipStatus",
             posts: "profile/getPosts",
             user: "profile/getUser"
-        })
+        }),
+        profileImage() {
+            const profileImage = this.user.profile_image;
+            const defaultImage = process.env.MIX_APP_URL + "/default.jpg";
+
+            return this.user.profile_image ? profileImage : defaultImage;
+        },
+        coverImage() {
+            const profileImage = this.user.cover_photo;
+            const defaultImage = process.env.MIX_APP_URL + "/default.jpg";
+
+            return this.user.cover_photo ? profileImage : defaultImage;
+        }
     },
     methods: {
         ...mapActions({
@@ -132,17 +144,7 @@ export default {
         this.isLoading = true;
         let user_id = this.$route.params.user_id;
 
-        if (Token.isExpired(AppStorage.getToken())) {
-            this.refreshToken()
-                .then(res => {
-                    this.getUser(user_id);
-                })
-                .catch(err => {
-                    this.$router.push({ name: "login" });
-                });
-        } else {
-            this.getUser(user_id);
-        }
+        this.getUser(user_id);
     }
 };
 </script>

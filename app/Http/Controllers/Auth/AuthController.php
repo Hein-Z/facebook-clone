@@ -70,7 +70,7 @@ class AuthController extends Controller
         }
 
         try {
-            if (!$token = auth()->attempt($validator->validated())) {
+            if (!$token = auth()->setTTL(120)->attempt($validator->validated())) {
                 return response()->json(['correct_credential' => false, 'email_verified' => false, 'message' => 'Either email or password is wrong.'], 401);
             }
         } catch (JWTException $e) {

@@ -15,4 +15,9 @@ class PostImage extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function getPostImagePathAttribute($value)
+    {
+        return asset($value);
+    }
 }
