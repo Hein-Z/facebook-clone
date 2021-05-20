@@ -18,6 +18,9 @@ export default {
         getUser: (state) => {
             return state.user
         },
+        getProfileImage: (state) => {
+            return state.user.profile_image;
+        },
         getUserId: (state) => {
             return state.user.id;
         },

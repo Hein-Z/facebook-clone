@@ -36,6 +36,7 @@ class AuthUserPostController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'status' => [Rule::requiredIf(empty($request->images)), 'string'],
             'images.*' => 'image|max:2048',

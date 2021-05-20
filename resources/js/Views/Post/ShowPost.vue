@@ -142,15 +142,14 @@
 }
 </style>
 <script>
-import Sidebar from "../components/Sidebar";
-import Nav from "../components/Nav";
+import Sidebar from "../../components/Sidebar";
+import Nav from "../../components/Nav";
 import { mapActions, mapMutations } from "vuex";
-import Reaction from "../components/Reaction";
+import Reaction from "../../components/Reaction";
 import moment from "moment";
-import CommentBox from "../components/CommentBox";
-import CommentForm from "../components/CommentForm";
-import Token from "../helper/Token";
-import AppStorage from "../helper/AppStorage";
+import CommentBox from "../../components/CommentBox";
+import CommentForm from "../../components/CommentForm";
+
 
 export default {
     name: "ShowPost",

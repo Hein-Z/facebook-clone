@@ -6,7 +6,7 @@
 
             <div class="overflow-x-hidden w-4/5">
                 <div class="flex flex-col items-center py-4 ">
-                    <NewPost />
+                    <NewPost @toNewPostForm="toNewPostForm" />
                     <Post
                         v-for="post in posts"
                         :key="post.id"
@@ -98,6 +98,11 @@ export default {
                             this.$toast.error(err.data.message);
                         }
                     });
+            });
+        },
+        toNewPostForm() {
+            this.$router.push({
+                name: "new-post"
             });
         }
     },

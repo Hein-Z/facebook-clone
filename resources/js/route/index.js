@@ -9,7 +9,8 @@ import ForgotPassword from "../Views/Auth/ForgotPassword";
 import Token from "../helper/Token";
 import AppStorage from "../helper/AppStorage";
 import NotFound from '../Views/NotFound'
-import ShowPost from '../Views/ShowPost'
+import ShowPost from '../Views/Post/ShowPost'
+import NewPostForm from '../Views/Post/NewPostForm'
 import Profile from '../Views/User/Profile'
 import axios from "axios";
 
@@ -26,6 +27,12 @@ const routes = [
         name: 'show-post',
         path: '/posts/:post_id',
         component: ShowPost,
+        meta: { requiresAuth: true },
+    },
+    {
+        name: 'new-post',
+        path: '/new-post',
+        component: NewPostForm,
         meta: { requiresAuth: true },
     },
     {
