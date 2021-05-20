@@ -37,9 +37,6 @@ export default {
             return !!state.user.email_verified_at;
         },
 
-        isPasswordConfirmed: (state) => {
-            return state.user.password === this.state.user.password_confirmation
-        },
 
     },
     mutations: {
@@ -50,6 +47,9 @@ export default {
             state.user.id = user.id;
             state.user.profile_image = user.profile_image;
             state.user.cover_photo = user.cover_photo;
+        },
+        SET_PROFILE_IMAGE(state, profile_image) {
+            state.user.profile_image = profile_image
         },
         SET_TOKEN(state, token) {
             AppStorage.storeToken(token);
@@ -161,16 +161,19 @@ export default {
                 throw err.response
             })
         },
-        fetchAuthUser({ commit, statem, dispatch }) {
+        fetchAuthUser({ commit, state, dispatch }) {
             return axios.post('auth/me').then(res => {
                 commit('SET_USER', res.data);
                 return res
             }).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('clearStorage');
-                }
+                dispatch('errorProcess', err);
                 throw err.response
             });
+        },
+        errorProcess({ dispatch }, err) {
+            if (err.response.status === 401) {
+                dispatch('clearStorage');
+            }
         }
     }
 }

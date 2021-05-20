@@ -176,7 +176,7 @@ export default {
         profileImage() {
             const defaultImage = "/default.jpg";
             if (this.post.user) {
-                const profileImage = "/uploads/" + this.post.user.profile_image;
+                const profileImage =  this.post.user.profile_image;
                 return this.post.user.profile_image
                     ? profileImage
                     : defaultImage;

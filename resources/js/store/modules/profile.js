@@ -26,6 +26,12 @@ export default {
         },
         SET_USER(state, user) {
             state.user = user
+        },
+        SET_PROFILE_IMAGE(state, profile_image) {
+            state.user.profile_image = profile_image;
+        },
+        SET_COVER_PHOTO(state, cover_photo) {
+            state.user.cover_photo = cover_photo;
         }
     },
     getters: {
@@ -52,51 +58,56 @@ export default {
     actions: {
         fetchUser({ commit, dispatch }, user_id) {
             return axios.get(`users/${user_id}/profile`).then(res => res).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-                }
+                dispatch('auth/errorProcess', err, { root: true });
                 throw (err.response)
             }).finally();
         },
         addFriend({ commit, dispatch, state }) {
             return axios.post(`users/${state.user.id}/add-friend`).then(res => res).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-                }
+                dispatch('auth/errorProcess', err, { root: true });
                 throw (err.response)
             }).finally();
         },
         acceptFriendRequest({ commit, dispatch, state }, user_id) {
             return axios.post(`users/${state.user.id}/accept-friend-request`).then(res => res).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-                }
+                dispatch('auth/errorProcess', err, { root: true });
                 throw (err.response)
             }).finally();
         },
         ignoreFriendRequest({ commit, dispatch, state }, user_id) {
             return axios.post(`users/${state.user.id}/ignore-friend-request`).then(res => res).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-                }
+                dispatch('auth/errorProcess', err, { root: true });
+
                 throw (err.response)
             }).finally();
         },
         unfriend({ commit, dispatch, state }) {
             return axios.post(`users/${state.user.id}/unfriend`).then(res => res).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-                }
+                dispatch('auth/errorProcess', err, { root: true });
+
                 throw (err.response)
             }).finally();
         },
         cancelFriendRequest({ commit, dispatch, state }) {
             return axios.post(`users/${state.user.id}/cancel-friend-request`).then(res => res).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-                }
+                dispatch('auth/errorProcess', err, { root: true });
+
                 throw (err.response)
             }).finally();
-        }
-    }
+        },
+        updateProfileImage({ dispatch }, profile_image) {
+            return axios.post('auth/update-profile-image?_method=PATCH', profile_image).then(res => res).catch(err => {
+                dispatch('auth/errorProcess', err, { root: true });
+                throw (err.response)
+            })
+        },
+        updateCoverPhoto({ dispatch }, cover_photo) {
+            return axios.post('auth/update-cover-photo?_method=PATCH', cover_photo).then(res => res).catch(err => {
+                dispatch('auth/errorProcess', err, { root: true });
+                throw (err.response)
+            })
+        },
+
+    },
+
 }

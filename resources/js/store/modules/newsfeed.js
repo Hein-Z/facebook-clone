@@ -40,11 +40,9 @@ export default {
     actions: {
         fetchPosts({ dispatch, commit }) {
             return axios.get('news-feed').then(res =>
-                 res
+                res
             ).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-                }
+                dispatch('auth/errorProcess', err, { root: true });
                 throw err.response
             });
         },
@@ -52,9 +50,7 @@ export default {
             return axios.get(`posts/${post_id}`)
                 .then(res => res)
                 .catch(err => {
-                    if (err.response.status === 401) {
-                        dispatch('auth/clearStorage', {}, { root: true });
-                    }
+                    dispatch('auth/errorProcess', err, { root: true });
                     throw err.response
 
                 });
@@ -63,9 +59,7 @@ export default {
             return axios.post(`posts/${post_id}/add-react`, { type })
                 .then(res => res)
                 .catch(err => {
-                    if (err.response.status === 401) {
-                        dispatch('auth/clearStorage', {}, { root: true });
-                    }
+                    dispatch('auth/errorProcess', err, { root: true });
                     throw err.response
 
                 });
@@ -74,20 +68,14 @@ export default {
             return axios.post(`posts/${post_id}/remove-react`)
                 .then(res => res)
                 .catch(err => {
-                    if (err.response.status === 401) {
-                        dispatch('auth/clearStorage', {}, { root: true });
-
-                    }
+                    dispatch('auth/errorProcess', err, { root: true });
                     throw err.response
 
                 });
         },
         postComment({ commit, dispatch }, { post_id, comment }) {
             return axios.post(`posts/${post_id}/comments`, { comment }).then(res => res).catch(err => {
-                if (err.response.status === 401) {
-                    dispatch('auth/clearStorage', {}, { root: true });
-
-                }
+                dispatch('auth/errorProcess', err, { root: true });
                 throw err.response
 
             });

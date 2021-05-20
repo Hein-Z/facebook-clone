@@ -6,9 +6,7 @@
 
             <div class="overflow-x-hidden w-4/5">
                 <div class="flex flex-col items-center py-4 ">
-                    <div class="flex justify-center">
-
-                    </div>
+                    <div class="flex justify-center"></div>
                     <div
                         class="bg-white rounded shadow w-2/3 p-4 cursor-pointer"
                         @click="$emit('toNewPostForm')"
@@ -67,6 +65,7 @@ import Sidebar from "../../components/Sidebar";
 import { mapGetters } from "vuex";
 
 
+
 export default {
     name: "new-post-form",
     data() {
@@ -77,8 +76,7 @@ export default {
     },
     components: {
         Sidebar,
-        Nav,
-        VueUploadMultipleImage
+        Nav
     },
     computed: {
         ...mapGetters({
@@ -90,7 +88,6 @@ export default {
 
             return this.profile_image ? profileImage : defaultImage;
         }
-    },
-
+    }
 };
 </script>

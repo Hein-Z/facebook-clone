@@ -26,7 +26,7 @@ export default {
     props: ["comment"],
     computed: {
         profileImage() {
-            const profileImage = "/uploads/" + this.comment.user.profile_image;
+            const profileImage =  this.comment.user.profile_image;
             const defaultImage = "/default.jpg";
 
             return this.comment.user.profile_image

@@ -8,7 +8,14 @@
                 <div class="flex flex-col items-center py-4 ">
                     <div class="flex flex-col items-center">
                         <div class="relative mb-10">
-                            <div class="w-100 h-64 overflow-hidden z-10">
+                            <div
+                                class="w-100 h-64 overflow-hidden z-10"
+                                :class="{
+                                    'cursor-pointer':
+                                        friendshipStatus === 'auth user'
+                                }"
+                                @click="clickCoverPhoto"
+                            >
                                 <img
                                     :src="coverImage"
                                     alt="post image"
@@ -21,6 +28,11 @@
                             >
                                 <div
                                     class="w-32 h-32 rounded-full overflow-hidden border-4"
+                                    :class="{
+                                        'cursor-pointer':
+                                            friendshipStatus === 'auth user'
+                                    }"
+                                    @click="clickProfileImage"
                                 >
                                     <img
                                         :src="profileImage"
@@ -64,6 +76,20 @@
                 </div>
             </div>
         </div>
+        <input
+            type="file"
+            ref="profile_image"
+            accept="image/*"
+            @change="updateProfileImage($event)"
+            style="display: none;"
+        />
+        <input
+            type="file"
+            ref="cover_photo"
+            accept="image/*"
+            @change="updateCoverPhoto($event)"
+            style="display: none;"
+        />
     </div>
 </template>
 
@@ -109,6 +135,41 @@ export default {
         }
     },
     methods: {
+        updateProfileImage(event) {
+            let formData = new FormData();
+            formData.append("profile_image", event.target.files[0]);
+            this.$store
+                .dispatch("profile/updateProfileImage", formData)
+                .then(res => {
+                    this.$store.commit(
+                        "profile/SET_PROFILE_IMAGE",
+                        res.data.data
+                    );
+                    this.$store.commit("auth/SET_PROFILE_IMAGE", res.data.data);
+                })
+                .catch(err => console.log(err));
+        },
+        updateCoverPhoto(event) {
+            let formData = new FormData();
+            formData.append("cover_photo", event.target.files[0]);
+            this.$store
+                .dispatch("profile/updateCoverPhoto", formData)
+                .then(res => {
+                    this.$store.commit(
+                        "profile/SET_COVER_PHOTO",
+                        res.data.data
+                    );
+                })
+                .catch(err => console.log(err));
+        },
+        clickProfileImage() {
+            if (this.friendshipStatus === "auth user")
+                this.$refs.profile_image.click();
+        },
+        clickCoverPhoto() {
+            if (this.friendshipStatus === "auth user")
+                this.$refs.cover_photo.click();
+        },
         ...mapActions({
             fetchUser: "profile/fetchUser"
         }),

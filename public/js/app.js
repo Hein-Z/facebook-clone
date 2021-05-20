@@ -1846,7 +1846,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -1899,7 +1899,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -1997,7 +1997,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -2137,7 +2137,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -2281,7 +2281,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -2386,7 +2386,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -2511,7 +2511,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _helper_AppStorage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper/AppStorage */ "./resources/js/helper/AppStorage.js");
 /* harmony import */ var _helper_Token__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper/Token */ "./resources/js/helper/Token.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -2907,14 +2907,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Nav */ "./resources/js/components/Nav.vue");
 /* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Sidebar */ "./resources/js/components/Sidebar.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -2989,8 +2987,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   components: {
     Sidebar: _components_Sidebar__WEBPACK_IMPORTED_MODULE_1__.default,
-    Nav: _components_Nav__WEBPACK_IMPORTED_MODULE_0__.default,
-    VueUploadMultipleImage: VueUploadMultipleImage
+    Nav: _components_Nav__WEBPACK_IMPORTED_MODULE_0__.default
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
     profile_image: "auth/getProfileImage"
@@ -3024,7 +3021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_CommentBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/CommentBox */ "./resources/js/components/CommentBox.vue");
 /* harmony import */ var _components_CommentForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/CommentForm */ "./resources/js/components/CommentForm.vue");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -3206,7 +3203,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var defaultImage = "/default.jpg";
 
       if (this.post.user) {
-        var profileImage = "/uploads/" + this.post.user.profile_image;
+        var profileImage = this.post.user.profile_image;
         return this.post.user.profile_image ? profileImage : defaultImage;
       }
 
@@ -3381,12 +3378,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_Token__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/Token */ "./resources/js/helper/Token.js");
 /* harmony import */ var _helper_AppStorage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/AppStorage */ "./resources/js/helper/AppStorage.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3492,7 +3515,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.user.cover_photo ? profileImage : defaultImage;
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapActions)({
+  methods: _objectSpread(_objectSpread(_objectSpread({
+    updateProfileImage: function updateProfileImage(event) {
+      var _this = this;
+
+      var formData = new FormData();
+      formData.append("profile_image", event.target.files[0]);
+      this.$store.dispatch("profile/updateProfileImage", formData).then(function (res) {
+        _this.$store.commit("profile/SET_PROFILE_IMAGE", res.data.data);
+
+        _this.$store.commit("auth/SET_PROFILE_IMAGE", res.data.data);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    updateCoverPhoto: function updateCoverPhoto(event) {
+      var _this2 = this;
+
+      var formData = new FormData();
+      formData.append("cover_photo", event.target.files[0]);
+      this.$store.dispatch("profile/updateCoverPhoto", formData).then(function (res) {
+        _this2.$store.commit("profile/SET_COVER_PHOTO", res.data.data);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    clickProfileImage: function clickProfileImage() {
+      if (this.friendshipStatus === "auth user") this.$refs.profile_image.click();
+    },
+    clickCoverPhoto: function clickCoverPhoto() {
+      if (this.friendshipStatus === "auth user") this.$refs.cover_photo.click();
+    }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapActions)({
     fetchUser: "profile/fetchUser"
   })), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)({
     setUser: "profile/SET_USER",
@@ -3502,32 +3556,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setLastPage: "profile/SET_LAST_PAGE"
   })), {}, {
     getUser: function getUser(user_id) {
-      var _this = this;
+      var _this3 = this;
 
       this.fetchUser(user_id).then(function (res) {
-        _this.setUser(res.data.user);
+        _this3.setUser(res.data.user);
 
-        _this.setPosts(res.data.user.posts.data);
+        _this3.setPosts(res.data.user.posts.data);
 
-        _this.setLastPage(res.data.user.posts.last_page);
+        _this3.setLastPage(res.data.user.posts.last_page);
 
-        _this.setCurrentPage(res.data.user.posts.current_page);
+        _this3.setCurrentPage(res.data.user.posts.current_page);
       })["catch"](function (err) {
         if (err.status === 401) {
-          _this.$toast.warning("Please login your account");
+          _this3.$toast.warning("Please login your account");
 
-          return _this.$router.push({
+          return _this3.$router.push({
             name: "login"
           });
         }
 
         if (err.data.message) {
-          _this.$toast.error(err.data.message);
+          _this3.$toast.error(err.data.message);
 
-          return _this.$router.back();
+          return _this3.$router.back();
         }
       })["finally"](function (_) {
-        return _this.isLoading = false;
+        return _this3.isLoading = false;
       });
     }
   }),
@@ -3580,7 +3634,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["comment"],
   computed: {
     profileImage: function profileImage() {
-      var profileImage = "/uploads/" + this.comment.user.profile_image;
+      var profileImage = this.comment.user.profile_image;
       var defaultImage = "/default.jpg";
       return this.comment.user.profile_image ? profileImage : defaultImage;
     },
@@ -3618,7 +3672,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -3788,7 +3842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -3982,7 +4036,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -4111,7 +4165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -4194,7 +4248,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Reaction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Reaction */ "./resources/js/components/Reaction.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -5328,8 +5382,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helper_AppStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/AppStorage */ "./resources/js/helper/AppStorage.js");
-var _this = undefined;
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5362,9 +5414,6 @@ var _this = undefined;
     },
     isUserVerify: function isUserVerify(state) {
       return !!state.user.email_verified_at;
-    },
-    isPasswordConfirmed: function isPasswordConfirmed(state) {
-      return state.user.password === _this.state.user.password_confirmation;
     }
   },
   mutations: {
@@ -5375,6 +5424,9 @@ var _this = undefined;
       state.user.id = user.id;
       state.user.profile_image = user.profile_image;
       state.user.cover_photo = user.cover_photo;
+    },
+    SET_PROFILE_IMAGE: function SET_PROFILE_IMAGE(state, profile_image) {
+      state.user.profile_image = profile_image;
     },
     SET_TOKEN: function SET_TOKEN(state, token) {
       _helper_AppStorage__WEBPACK_IMPORTED_MODULE_1__.default.storeToken(token);
@@ -5513,18 +5565,22 @@ var _this = undefined;
     },
     fetchAuthUser: function fetchAuthUser(_ref10) {
       var commit = _ref10.commit,
-          statem = _ref10.statem,
+          state = _ref10.state,
           dispatch = _ref10.dispatch;
       return axios__WEBPACK_IMPORTED_MODULE_0___default().post('auth/me').then(function (res) {
         commit('SET_USER', res.data);
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('clearStorage');
-        }
-
+        dispatch('errorProcess', err);
         throw err.response;
       });
+    },
+    errorProcess: function errorProcess(_ref11, err) {
+      var dispatch = _ref11.dispatch;
+
+      if (err.response.status === 401) {
+        dispatch('clearStorage');
+      }
     }
   }
 });
@@ -5601,12 +5657,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().get('news-feed').then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       });
     },
@@ -5616,12 +5669,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().get("posts/".concat(post_id)).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       });
     },
@@ -5635,12 +5685,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       });
     },
@@ -5650,12 +5697,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().post("posts/".concat(post_id, "/remove-react")).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       });
     },
@@ -5669,12 +5713,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       });
     }
@@ -5737,6 +5778,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     SET_USER: function SET_USER(state, user) {
       state.user = user;
+    },
+    SET_PROFILE_IMAGE: function SET_PROFILE_IMAGE(state, profile_image) {
+      state.user.profile_image = profile_image;
+    },
+    SET_COVER_PHOTO: function SET_COVER_PHOTO(state, cover_photo) {
+      state.user.cover_photo = cover_photo;
     }
   },
   getters: {
@@ -5766,12 +5813,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().get("users/".concat(user_id, "/profile")).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       })["finally"]();
     },
@@ -5782,12 +5826,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().post("users/".concat(state.user.id, "/add-friend")).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       })["finally"]();
     },
@@ -5798,12 +5839,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().post("users/".concat(state.user.id, "/accept-friend-request")).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       })["finally"]();
     },
@@ -5814,12 +5852,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().post("users/".concat(state.user.id, "/ignore-friend-request")).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       })["finally"]();
     },
@@ -5830,12 +5865,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().post("users/".concat(state.user.id, "/unfriend")).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       })["finally"]();
     },
@@ -5846,14 +5878,33 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return axios__WEBPACK_IMPORTED_MODULE_0___default().post("users/".concat(state.user.id, "/cancel-friend-request")).then(function (res) {
         return res;
       })["catch"](function (err) {
-        if (err.response.status === 401) {
-          dispatch('auth/clearStorage', {}, {
-            root: true
-          });
-        }
-
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
         throw err.response;
       })["finally"]();
+    },
+    updateProfileImage: function updateProfileImage(_ref7, profile_image) {
+      var dispatch = _ref7.dispatch;
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post('auth/update-profile-image?_method=PATCH', profile_image).then(function (res) {
+        return res;
+      })["catch"](function (err) {
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
+        throw err.response;
+      });
+    },
+    updateCoverPhoto: function updateCoverPhoto(_ref8, cover_photo) {
+      var dispatch = _ref8.dispatch;
+      return axios__WEBPACK_IMPORTED_MODULE_0___default().post('auth/update-cover-photo?_method=PATCH', cover_photo).then(function (res) {
+        return res;
+      })["catch"](function (err) {
+        dispatch('auth/errorProcess', err, {
+          root: true
+        });
+        throw err.response;
+      });
     }
   }
 });
@@ -79066,7 +79117,14 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "w-100 h-64 overflow-hidden z-10" },
+                        {
+                          staticClass: "w-100 h-64 overflow-hidden z-10",
+                          class: {
+                            "cursor-pointer":
+                              _vm.friendshipStatus === "auth user"
+                          },
+                          on: { click: _vm.clickCoverPhoto }
+                        },
                         [
                           _c("img", {
                             staticClass: "object-cover w-full rounded-lg",
@@ -79086,7 +79144,12 @@ var render = function() {
                             "div",
                             {
                               staticClass:
-                                "w-32 h-32 rounded-full overflow-hidden border-4"
+                                "w-32 h-32 rounded-full overflow-hidden border-4",
+                              class: {
+                                "cursor-pointer":
+                                  _vm.friendshipStatus === "auth user"
+                              },
+                              on: { click: _vm.clickProfileImage }
                             },
                             [
                               _c("img", {
@@ -79157,7 +79220,29 @@ var render = function() {
           ])
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("input", {
+        ref: "profile_image",
+        staticStyle: { display: "none" },
+        attrs: { type: "file", accept: "image/*" },
+        on: {
+          change: function($event) {
+            return _vm.updateProfileImage($event)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        ref: "cover_photo",
+        staticStyle: { display: "none" },
+        attrs: { type: "file", accept: "image/*" },
+        on: {
+          change: function($event) {
+            return _vm.updateCoverPhoto($event)
+          }
+        }
+      })
     ],
     1
   )
