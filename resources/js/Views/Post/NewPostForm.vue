@@ -6,7 +6,21 @@
 
             <div class="overflow-x-hidden w-4/5">
                 <div class="flex flex-col items-center py-4 ">
-                    <div class="flex justify-center"></div>
+                    <div class="flex justify-center">
+                        <el-upload
+                            list-type="picture-card"
+                            action="api/posts/el-upload"
+                            :on-preview="handlePictureCardPreview"
+                            :auto-upload="true"
+                            :on-remove="handleRemove"
+                            :before-upload="beforeUpload"
+                        >
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img :src="dialogImageUrl" width="100%" />
+                        </el-dialog>
+                    </div>
                     <div
                         class="bg-white rounded shadow w-2/3 p-4 cursor-pointer"
                         @click="$emit('toNewPostForm')"
@@ -36,7 +50,9 @@
                             </div>
                             <div>
                                 <button
-                                    class="flex justify-center items-center rounded-full w-10 h-10 bg-gray-200"
+                                    class="flex justify-center items-center rounded-full w-10 h-10 bg-gray-200 btn"
+                                    :class="{ 'opacity-50': isCreatingPost }"
+                                    @click="createPost"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -59,18 +75,20 @@
         </div>
     </div>
 </template>
+
 <script>
 import Nav from "../../components/Nav";
 import Sidebar from "../../components/Sidebar";
 import { mapGetters } from "vuex";
 
-
-
 export default {
     name: "new-post-form",
     data() {
         return {
-            images: [],
+            dialogImageUrl: "",
+            dialogVisible: false,
+            imageList: [],
+            isCreatingPost: false,
             status: ""
         };
     },
@@ -87,6 +105,70 @@ export default {
             const defaultImage = process.env.MIX_APP_URL + "/default.jpg";
 
             return this.profile_image ? profileImage : defaultImage;
+        }
+    },
+    methods: {
+        handlePictureCardPreview(file) {
+            this.dialogImageUrl = file.url;
+            this.dialogVisible = true;
+        },
+        handleRemove(file, fileList) {
+            this.imageList = [];
+            fileList.forEach(f => {
+                this.imageList.push(f.raw);
+            });
+        },
+        updateImageList(file) {
+            this.imageList.push(file);
+        },
+        checkType(file) {
+            const acceptType = [
+                "image/jpeg",
+                "image/jpg",
+                "image/gif",
+                "image/png"
+            ];
+            return acceptType.includes(file.type);
+        },
+        checkSize(file) {
+            return file.size / 1024 / 1024 < 2;
+        },
+        beforeUpload(file) {
+            const isImg = this.checkType(file);
+            const isLt2M = this.checkSize(file);
+            if (!isImg) this.$toast.error("Picture must be Image!");
+
+            if (!isLt2M) this.$$toast.error("Picture size can not exceed 2MB!");
+
+            if (isImg && isLt2M) this.updateImageList(file);
+
+            return isImg && isLt2M;
+        },
+        createPost() {
+            if (!this.status.trim()) {
+                this.$toast.warning("status is required");
+                return;
+            }
+            this.isCreatingPost = true;
+            const formData = new FormData();
+
+            formData.append("status", this.status);
+            $.each(this.imageList, function(key, image) {
+                formData.append(`images[${key}]`, image);
+            });
+            axios
+                .post("posts", formData, {
+                    headers: { "Content-Type": "multipart/form-data" }
+                })
+                .then(res => {
+                    this.$toast.success("successfully created post");
+                    this.$router.push({ name: "home" });
+                })
+                .catch(err => {
+                    this.$toast.warning(
+                        "status is required or image must be type of image"
+                    );
+                });
         }
     }
 };

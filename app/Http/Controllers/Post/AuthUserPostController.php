@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -28,6 +29,11 @@ class AuthUserPostController extends Controller
         return response()->json(['user' => $user]);
     }
 
+    public function elUpload(Request $request)
+    {
+        return response()->json([], 204);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,10 +43,7 @@ class AuthUserPostController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'status' => [Rule::requiredIf(empty($request->images)), 'string'],
-            'images.*' => 'image|max:2048',
-        ]);
+        $validator = $this->validator($request);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
@@ -78,10 +81,7 @@ class AuthUserPostController extends Controller
     public function update(Request $request, $id)
     {
 
-        $validator = Validator::make($request->all(), [
-            'status' => ['string', Rule::requiredIf(empty($request->images))],
-            'images.*' => 'image|max:2048',
-        ]);
+        $validator = $this->validator($request);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
@@ -144,5 +144,15 @@ class AuthUserPostController extends Controller
         Storage::disk('uploads')->deleteDirectory(auth()->user()->email . '/post/' . $post->id);
 
         return response()->json(['message' => 'Successfully deleted'], 202);
+    }
+
+    public function validator($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => [Rule::requiredIf(empty($request->images)), 'string'],
+            'images.*' => 'image|max:2048',
+        ]);
+
+        return $validator;
     }
 }

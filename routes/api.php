@@ -49,9 +49,12 @@ Route::get('users/{user_id}/friends', 'Friend\UserFriendsController@index')->mid
 Route::get('users/{user_id}/posts', 'Post\UserPostController@index')->middleware('auth.jwt');
 
 Route::get('posts/{post_id}', 'Post\ShowPostController@index')->middleware('auth.jwt');
-Route::resource('posts', 'Post\AuthUserPostController')->except(['create', 'edit','show'])->middleware('auth.jwt');
+Route::post('posts/el-upload', 'Post\AuthUserPostController@elUpload');
+Route::resource('posts', 'Post\AuthUserPostController')->except(['create', 'edit', 'show'])->middleware('auth.jwt');
+
 Route::resource('posts.comments', 'Comment\AuthUserCommentController')->except(['index', 'create', 'edit'])->middleware('auth.jwt');
 Route::get('posts/{post_id}/comments', 'Post\PostCommentController@index')->middleware('auth.jwt');
+
 Route::get('posts/{post_id}/reacts', 'Post\PostReactController@index')->middleware('auth.jwt');
 Route::post('posts/{post_id}/add-react', 'React\AuthUserReactController@store')->middleware('auth.jwt');
 Route::post('posts/{post_id}/remove-react', 'React\AuthUserReactController@destroy')->middleware('auth.jwt');

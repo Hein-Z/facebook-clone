@@ -147,7 +147,12 @@ export default {
                     );
                     this.$store.commit("auth/SET_PROFILE_IMAGE", res.data.data);
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    if (err.data)
+                        this.$toast.warning(
+                            "Profile image must be type of image"
+                        );
+                });
         },
         updateCoverPhoto(event) {
             let formData = new FormData();
@@ -160,7 +165,12 @@ export default {
                         res.data.data
                     );
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    if (err.data)
+                        this.$toast.warning(
+                            "Cover photo must be type of image"
+                        );
+                });
         },
         clickProfileImage() {
             if (this.friendshipStatus === "auth user")
